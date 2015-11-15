@@ -73,6 +73,10 @@ module.exports = class Generator extends Base {
     });
   }
 
+  configuring() {
+    this.config.save(this.data);
+  }
+
   writing() {
     this._templateFile('gulpfile.js', 'gulpfile.js', this.data);
     this._templateDirectory('gulp', 'gulp', this.data);
