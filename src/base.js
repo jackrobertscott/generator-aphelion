@@ -41,10 +41,10 @@ module.exports = class GeneratorBase extends Base {
   _prepareFiles(src, dest, cb) {
     const files = [];
 
-    src = path.join(this.templatePath(src), '**/*');
+    src = this.templatePath(src);
     dest = this.destinationPath(dest);
 
-    glob(src, (err, paths) => {
+    glob(path.join(src, '**/*'), (err, paths) => {
       if (err) {
         throw err;
       }
