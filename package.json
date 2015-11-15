@@ -23,15 +23,16 @@
     "url": "https://github.com/jackrobertscott/generator-aphelion/issues"
   },
   "homepage": "https://github.com/jackrobertscott/generator-aphelion#readme",
-  "devDependencies": {
-    "babel-preset-es2015": "^6.1.18",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^6.1.0"
-  },
   "dependencies": {
     "glob": "^6.0.1",
     "lodash": "^3.10.1",
     "yeoman-generator": "^0.21.1",
     "yosay": "^1.0.5"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.1.18",
+    "del": "^2.1.0",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.0"
   }
 }

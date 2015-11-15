@@ -1,10 +1,10 @@
 import path from 'path';
-import generator from 'yeoman-generator';
+import {Base} from 'yeoman-generator';
 import glob from 'glob';
 
-export default class Generator extends generator.Base {
+export default class Generator extends Base {
   constructor() {
-    super(arguments);
+    super(...arguments);
   }
 
   _copyFile(src, dest) {
