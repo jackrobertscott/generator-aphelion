@@ -24,17 +24,17 @@ gulp.task('js', function() {
 gulp.task('coffee', function() {
   return gulp.src(help.src('.coffee'))
     .pipe(plumber(help.plumb))
-    .pipe(gulpif(!!config.sourcemaps, sourcemaps.init()))
+    .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(coffee())
-    .pipe(gulpif(!!config.sourcemaps, sourcemaps.write()))
+    .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
     .pipe(gulp.dest(config.tmp));
 });<% } %><% if (es6) { %>
 
 gulp.task('es6', function() {
   return gulp.src(help.src('.es6'))
     .pipe(plumber(help.plumb))
-    .pipe(gulpif(!!config.sourcemaps, sourcemaps.init()))
+    .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(babel())
-    .pipe(gulpif(!!config.sourcemaps, sourcemaps.write()))
+    .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
     .pipe(gulp.dest(config.tmp));
 });<% } %>

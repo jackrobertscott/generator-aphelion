@@ -19,25 +19,29 @@ gulp.task('styles', [<% if (css) { %>
 
 gulp.task('css', function() {
   return gulp.src(help.src('.css'))
+    .pipe(plumber(help.plumb))
+    .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
+    .pipe(autoprefixer())
+    .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
     .pipe(gulp.dest(config.tmp));
 });<% } %><% if (less) { %>
 
 gulp.task('less', function() {
   return gulp.src(help.src('.less'))
     .pipe(plumber(help.plumb))
-    .pipe(gulpif(!!config.sourcemaps, sourcemaps.init()))
+    .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(less())
     .pipe(autoprefixer())
-    .pipe(gulpif(!!config.sourcemaps, sourcemaps.write()))
+    .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
     .pipe(gulp.dest(config.paths.tmp));
 });<% } %><% if (sass) { %>
 
 gulp.task('sass', function() {
   return gulp.src(help.src('.{sass,scss}'))
     .pipe(plumber(help.plumb))
-    .pipe(gulpif(!!config.sourcemaps, sourcemaps.init()))
+    .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(sass())
     .pipe(autoprefixer())
-    .pipe(gulpif(!!config.sourcemaps, sourcemaps.write()))
+    .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
     .pipe(gulp.dest(config.paths.tmp));
 });<% } %>
