@@ -7,30 +7,21 @@ var del = require('del');
 
 var config = {
   src: 'src',
-  dest: 'es6',
+  dest: 'generators',
 };
-
-gulp.task('compile', [
-  'babel',
-  'templates',
-]);
 
 gulp.task('clean', function() {
   return del(config.dest);
 });
 
-gulp.task('babel', ['clean'], function() {
-  return gulp.src([
-      path.join(config.src, '**'),
-      '!' + path.join(config.src, '**', 'templates', '**'),
-    ])
+gulp.task('compile', ['clean'], function() {
+  return gulp.src(path.join(config.src, '**'))
     .pipe(babel({
       presets: ['es2015'],
+      ignore: [
+        '**/templates/**',
+        '**/*.json',
+      ],
     }))
-    .pipe(gulp.dest('generators'));
-});
-
-gulp.task('templates', ['clean'], function() {
-  return gulp.src('src/**/templates/**')
-    .pipe(gulp.dest('generators'));
+    .pipe(gulp.dest(config.dest));
 });

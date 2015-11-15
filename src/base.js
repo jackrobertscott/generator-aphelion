@@ -1,8 +1,8 @@
-import path from 'path';
-import {Base} from 'yeoman-generator';
-import glob from 'glob';
+const path = require('path');
+const Base = require('yeoman-generator').Base;
+const glob = require('glob');
 
-export default class Generator extends Base {
+module.exports = class GeneratorBase extends Base {
   constructor() {
     super(...arguments);
   }
@@ -69,4 +69,4 @@ export default class Generator extends Base {
 
     return files;
   }
-}
+};

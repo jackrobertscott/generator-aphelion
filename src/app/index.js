@@ -1,9 +1,9 @@
-import yosay from 'yosay';
-import _ from 'lodash';
-import Base from '../base';
-import prompts from './prompts';
+const yosay = require('yosay');
+const _ = require('lodash');
+const Base = require('../base');
+const options = require('./options');
 
-export default class Generator extends Base {
+module.exports = class Generator extends Base {
   constructor() {
     super(...arguments);
 
@@ -21,16 +21,11 @@ export default class Generator extends Base {
       desc: 'Skips the message after the installation of dependencies',
       type: Boolean,
     });
-  }
 
-  initializing() {
-    prompts.forEach((prompt) => {
-      prompt.choices.forEach((choice) => {
-        this.option(choice.value, {
-          desc: prompt.message + ' ' + choice.value,
-          type: Boolean,
-          default: false,
-        });
+    options.forEach((option) => {
+      this.option(option.name, {
+        desc: 'Install ' + option.pretty,
+        type: Boolean,
       });
     });
   }
@@ -42,8 +37,38 @@ export default class Generator extends Base {
       this.log(yosay('Allo! Allo! This is the aphelion website generator.'));
     }
 
+    let prompts = _.uniq(options, (option) => {
+        return option.type;
+      })
+      .map(({type}) => {
+        let choices = options.filter((option) => {
+            return option.type === type && !this.options[option.name];
+          })
+          .map((option) => {
+            return {
+              name: option.pretty,
+              value: option.name,
+            };
+          });
+
+        return {
+          type: 'checkbox',
+          name: type,
+          message: 'Include which ' + type + ':',
+          choices: choices,
+          when: !!choices.length,
+        };
+      });
+
     this.prompt(prompts, (answers) => {
-      this.data = _.assign(this.options, answers);
+      this.data = {};
+
+      options.forEach((option) => {
+        this.data[option.name] = (answers[option.type] &&
+            answers[option.type].indexOf(option.name) !== -1) ||
+          !!this.options[option.name] || false; // shouldn't reach false
+      });
+
       done();
     });
   }
@@ -51,28 +76,17 @@ export default class Generator extends Base {
   get writing() {
     return {
       writeGulp() {
-        this._templateFile('templates/gulpfile.js', 'gulpfile.js', this.data);
-        this._templateDirectory('templates/gulp/common', 'gulp', this.data);
+        this._templateFile('gulpfile.js', 'gulpfile.js', this.data);
+        this._templateDirectory('gulp/common', 'gulp', this.data);
 
-        // markups
-        if (this.data.html) this._copyFile('templates/gulp/compilers/html.js', 'gulp/compilers/html.js');
-        if (this.data.jade) this._copyFile('templates/gulp/compilers/jade.js', 'gulp/compilers/jade.js');
-        if (this.data.nunjucks) this._copyFile('templates/gulp/compilers/nunjucks.js', 'gulp/compilers/nunjucks.js');
-
-        // styles
-        if (this.data.sass) this._copyFile('templates/gulp/compilers/sass.js', 'gulp/compilers/sass.js');
-        if (this.data.less) this._copyFile('templates/gulp/compilers/less.js', 'gulp/compilers/less.js');
-        if (this.data.css) this._copyFile('templates/gulp/compilers/css.js', 'gulp/compilers/css.js');
-
-        // scripts
-        if (this.data.coffee) this._copyFile('templates/gulp/compilers/coffee.js', 'gulp/compilers/coffee.js');
-        if (this.data.es6) this._copyFile('templates/gulp/compilers/es6.js', 'gulp/compilers/es6.js');
-        if (this.data.js) this._copyFile('templates/gulp/compilers/js.js', 'gulp/compilers/js.js');
+        _.keys(this.data).forEach((key) => {
+          this._copyFile('gulp/compilers/' + key + '.js', 'gulp/compilers/' + key + '.js');
+        });
       },
 
       writePkg() {
-        this._templateFile('templates/_package.json', 'package.json', this.data);
-      }
+        this._templateFile('_package.json', 'package.json', this.data);
+      },
     };
   }
 
@@ -83,4 +97,4 @@ export default class Generator extends Base {
       });
     }
   }
-}
+};
