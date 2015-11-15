@@ -1,11 +1,11 @@
 'use strict';
 
-var gulp = require('gulp');
+var gulp = require('gulp');<% if (coffee || es6) { %>
 var plumber = require('gulp-plumber');
 var gulpif = require('gulp-if');
-var sourcemaps = require('gulp-sourcemaps');
-var coffee = require('gulp-coffee');
-var babel = require('gulp-babel');
+var sourcemaps = require('gulp-sourcemaps');<% } %><% if (coffee) { %>
+var coffee = require('gulp-coffee');<% } %><% if (es6) { %>
+var babel = require('gulp-babel');<% } %>
 
 var config = require('../config');
 var help = require('./help');

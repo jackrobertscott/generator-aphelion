@@ -1,11 +1,11 @@
 'use strict';
 
 var path = require('path');
-var gulp = require('gulp');
+var gulp = require('gulp');<% if (jade || nunjucks) { %>
 var plumber = require('gulp-plumber');
-var data = require('gulp-data');
-var jade = require('gulp-jade');
-var nunjucks = require('gulp-nunjucks-render');
+var data = require('gulp-data');<% } %><% if (jade) { %>
+var jade = require('gulp-jade');<% } %><% if (nunjucks) { %>
+var nunjucks = require('gulp-nunjucks-render');<% } %>
 
 var config = require('../config');
 var help = require('./help');

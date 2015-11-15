@@ -1,12 +1,12 @@
 'use strict';
 
-var gulp = require('gulp');
+var gulp = require('gulp');<% if (less || sass) { %>
 var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
-var gulpif = require('gulp-if');
-var sass = require('gulp-sass');
-var less = require('gulp-less');
+var gulpif = require('gulp-if');<% } %><% if (less) { %>
+var less = require('gulp-less');<% } %><% if (sass) { %>
+var sass = require('gulp-sass');<% } %>
 
 var config = require('../config');
 var help = require('./help');
