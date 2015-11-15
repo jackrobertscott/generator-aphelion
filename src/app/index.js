@@ -73,21 +73,10 @@ module.exports = class Generator extends Base {
     });
   }
 
-  get writing() {
-    return {
-      writeGulp() {
-        this._templateFile('gulpfile.js', 'gulpfile.js', this.data);
-        this._templateDirectory('gulp/common', 'gulp', this.data);
-
-        _.keys(this.data).forEach((key) => {
-          this._copyFile('gulp/compilers/' + key + '.js', 'gulp/compilers/' + key + '.js');
-        });
-      },
-
-      writePkg() {
-        this._templateFile('_package.json', 'package.json', this.data);
-      },
-    };
+  writing() {
+    this._templateFile('gulpfile.js', 'gulpfile.js', this.data);
+    this._templateDirectory('gulp', 'gulp', this.data);
+    this._templateFile('_package.json', 'package.json', this.data);
   }
 
   install() {

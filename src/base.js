@@ -23,22 +23,22 @@ module.exports = class GeneratorBase extends Base {
   }
 
   _copyDirectory(src, dest) {
-    const files = this._prepareFiles(src, dest);
-
-    files.forEach((file) => {
-      this.fs.copy(file.src, file.dest);
+    this._prepareFiles(src, dest, (files) => {
+      files.forEach((file) => {
+        this.fs.copy(file.src, file.dest);
+      });
     });
   }
 
   _templateDirectory(src, dest, data) {
-    const files = this._prepareFiles(src, dest);
-
-    files.forEach((file) => {
-      this.fs.copyTpl(file.src, file.dest, data);
+    this._prepareFiles(src, dest, (files) => {
+      files.forEach((file) => {
+        this.fs.copyTpl(file.src, file.dest, data);
+      });
     });
   }
 
-  _prepareFiles(src, dest) {
+  _prepareFiles(src, dest, cb) {
     const files = [];
 
     src = path.join(this.templatePath(src), '**/*');
@@ -65,6 +65,8 @@ module.exports = class GeneratorBase extends Base {
           dest: destPath,
         });
       });
+
+      cb(files);
     });
 
     return files;
