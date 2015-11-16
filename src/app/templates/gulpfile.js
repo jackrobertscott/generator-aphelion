@@ -15,12 +15,9 @@ gulp.task('serve', [
   'compile',
   'watch',
 ], function(cb) {
-  // TODO fix compile task cb
-  setTimeout(function() {
-    browserSync.init({
-      server: config.tmp,
-    }, cb);
-  }, 2000);
+  browserSync.init({
+    server: config.tmp,
+  }, cb);
 });
 
 gulp.task('reload', browserSync.reload);

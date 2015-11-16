@@ -39,7 +39,7 @@ gulp.task('jade', function() {
 });<% } %><% if (nunjucks) { %>
 
 gulp.task('nunjucks', function() {
-  return gulp.src(help.filter(config.src, '.{nunjucks}'))
+  return gulp.src(help.filter(config.src, '.nunjucks'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
       return require(path.join(path.dirname(file.path), path.basename(file.path) + '.json'));
