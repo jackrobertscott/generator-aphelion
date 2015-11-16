@@ -30,7 +30,9 @@ gulp.task('jade', function() {
   return gulp.src(help.filter(config.src, '.jade'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
-      return require(path.join(path.dirname(file.path), path.basename(file.path) + '.json'));
+      try {
+        return require(path.join(path.dirname(file.path), path.basename(file.path, path.extname(file.path)) + '.json'));
+      } catch(e) {}
     }))
     .pipe(jade({
       pretty: true,
@@ -42,7 +44,7 @@ gulp.task('nunjucks', function() {
   return gulp.src(help.filter(config.src, '.nunjucks'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
-      return require(path.join(path.dirname(file.path), path.basename(file.path) + '.json'));
+      return require(path.join(path.dirname(file.path), path.basename(file.path, path.extname(file.path)) + '.json'));
     }))
     .pipe(nunjucks())
     .pipe(gulp.dest(config.paths.tmp));

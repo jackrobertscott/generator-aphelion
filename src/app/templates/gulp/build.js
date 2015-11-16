@@ -10,8 +10,8 @@ var csso = require('gulp-csso');
 var minify = require('gulp-minify-html');
 var sequence = require('run-sequence');
 var del = require('del');
-var config = require('./config');
-var help = require('./gulp/help');
+var config = require('../config');
+var help = require('./help');
 
 gulp.task('build', ['clean:build'], function(cb) {
   sequence('compress', 'inject:build', cb);
