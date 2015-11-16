@@ -1,5 +1,6 @@
 'use strict';
 
+var path = require('path');
 var gulp = require('gulp');<% if (less || sass) { %>
 var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
@@ -16,8 +17,8 @@ gulp.task('styles', [
   'sass',<% } %>
 ]);
 
-gulp.task('watch:styles', function() {<% if (css) { %>
-  gulp.watch(path.join(config.src, '**/*.css'), ['css', 'reload']);<% } %><% if (less) { %>
+gulp.task('watch:styles', function() {
+  gulp.watch(path.join(config.src, '**/*.css'), ['css', 'reload']);<% if (less) { %>
   gulp.watch(path.join(config.src, '**/*.less'), ['less', 'reload']);<% } %><% if (sass) { %>
   gulp.watch(path.join(config.src, '**/*.{sass,scss}'), ['sass', 'reload']);<% } %>
 });

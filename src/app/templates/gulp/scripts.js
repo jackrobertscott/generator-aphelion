@@ -1,5 +1,6 @@
 'use strict';
 
+var path = require('path');
 var gulp = require('gulp');<% if (coffee || es6) { %>
 var plumber = require('gulp-plumber');
 var gulpif = require('gulp-if');
@@ -15,8 +16,8 @@ gulp.task('scripts', [
   'es6',<% } %>
 ]);
 
-gulp.task('watch:scripts', function() {<% if (js) { %>
-  gulp.watch(path.join(config.src, '**/*.js'), ['js', 'reload']);<% } %><% if (coffee) { %>
+gulp.task('watch:scripts', function() {
+  gulp.watch(path.join(config.src, '**/*.js'), ['js', 'reload']);<% if (coffee) { %>
   gulp.watch(path.join(config.src, '**/*.coffee'), ['coffee', 'reload']);<% } %><% if (es6) { %>
   gulp.watch(path.join(config.src, '**/*.es6'), ['es6', 'reload']);<% } %>
 });

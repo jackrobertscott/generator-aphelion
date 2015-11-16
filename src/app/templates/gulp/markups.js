@@ -15,8 +15,8 @@ gulp.task('markups', [
   'nunjucks',<% } %>
 ]);
 
-gulp.task('watch:markups', function() {<% if (html) { %>
-  gulp.watch(path.join(config.src, '**/*.html'), ['html', 'reload']);<% } %><% if (jade) { %>
+gulp.task('watch:markups', function() {
+  gulp.watch(path.join(config.src, '**/*.html'), ['html', 'reload']);<% if (jade) { %>
   gulp.watch(path.join(config.src, '**/*.jade'), ['jade', 'reload']);<% } %><% if (nunjucks) { %>
   gulp.watch(path.join(config.src, '**/*.nunjucks'), ['nunjucks', 'reload']);<% } %>
 });

@@ -16,11 +16,11 @@ gulp.task('compile', ['clean:compile'], function(cb) {
     'styles',
     'images',
     'other',
-    'vendor',
+    'bower',
   ], 'inject:compile', cb);
 });
 
-gulp.task('vendor', function() {
+gulp.task('bower', function() {
   return gulp.src(bowerFiles())
     .pipe(gulp.dest(path.join(config.tmp, 'vendor')));
 });

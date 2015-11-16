@@ -83,7 +83,7 @@ module.exports = class Generator extends Base {
   }
 
   writing() {
-    let out = path.join(this.data.site.src, this.data.name);
+    let out = path.join(this.data.site.src || 'src', this.data.name);
     switch (this.data.markups) {
       case 'jade':
         this._copyDirectory('jade', out);

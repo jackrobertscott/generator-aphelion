@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Page Title</title>
+    <title>{% block title %}Default Title{% endblock %}</title>
     <!-- bower:css -->
     <!-- bower installed css files will go here... -->
     <!-- endinject -->
@@ -10,8 +10,9 @@
     <!-- endinject -->
   </head>
   <body>
-    <h1>Allo! Welcome to the Aphelion Generator!</h1>
-    <p>We are very pleased to have you.</p>
+    {% block content %}
+    <h1>Default Content!</h1>
+    {% endblock %}
 
     <!-- bower:js -->
     <!-- bower installed scripts will go here... -->

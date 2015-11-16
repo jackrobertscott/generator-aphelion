@@ -37,10 +37,12 @@ module.exports = class Generator extends Base {
       this.log(yosay('Allo! Allo! This is the aphelion website generator.'));
     }
 
-    let prompts = _.uniq(options, (option) => {
+    const prompts = _.uniq(options, (option) => {
         return option.type;
       })
-      .map(({type}) => {
+      .map(({
+        type
+      }) => {
         let choices = options.filter((option) => {
             return option.type === type && !this.options[option.name];
           })
@@ -74,13 +76,23 @@ module.exports = class Generator extends Base {
   }
 
   configuring() {
-    this.config.save(this.data);
+    this.config.set(this.data);
   }
 
   writing() {
+    this._copyFile('config.json', 'config.json');
+    this._templateFile('_package.json', 'package.json', this.data);
     this._templateFile('gulpfile.js', 'gulpfile.js', this.data);
     this._templateDirectory('gulp', 'gulp', this.data);
-    this._templateFile('_package.json', 'package.json', this.data);
+    this.composeWith('aphelion:page', {
+      options: {
+        'skip-welcome-message': true,
+        markups: (this.data.jade) ? 'jade' : (this.data.nunjucks) ? 'nunjucks' : 'html',
+        styles: (this.data.less) ? 'less' : (this.data.sass) ? 'scss' : 'css',
+      }
+    }, {
+      local: require.resolve('../page'),
+    });
   }
 
   install() {
