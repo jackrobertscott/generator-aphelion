@@ -10,7 +10,7 @@ var help = require('./help');
 var config = require('./config');
 
 gulp.task('sass', function() {
-  return gulp.src(help.src('.{sass,scss}'))
+  return gulp.src(help.filter(config.src, '.{sass,scss}'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(!!config.sourcemaps, sourcemaps.init()))
     .pipe(sass())

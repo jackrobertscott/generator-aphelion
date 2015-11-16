@@ -22,12 +22,12 @@ gulp.task('watch:markups', function() {<% if (html) { %>
 });<% if (html) { %>
 
 gulp.task('html', function() {
-  return gulp.src(help.src('.html'))
+  return gulp.src(help.filter(config.src, '.html'))
     .pipe(gulp.dest(config.tmp));
 });<% } %><% if (jade) { %>
 
 gulp.task('jade', function() {
-  return gulp.src(help.src('.jade'))
+  return gulp.src(help.filter(config.src, '.jade'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
       return require(path.join(path.dirname(file.path), path.basename(file.path) + '.json'));
@@ -39,7 +39,7 @@ gulp.task('jade', function() {
 });<% } %><% if (nunjucks) { %>
 
 gulp.task('nunjucks', function() {
-  return gulp.src(help.src('.{nunjucks}'))
+  return gulp.src(help.filter(config.src, '.{nunjucks}'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
       return require(path.join(path.dirname(file.path), path.basename(file.path) + '.json'));

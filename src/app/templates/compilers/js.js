@@ -5,6 +5,6 @@ var config = require('./config');
 var help = require('./help');
 
 gulp.task('js', function() {
-  return gulp.src(help.src('.js'))
+  return gulp.src(help.filter(config.src, '.js'))
     .pipe(gulp.dest(config.tmp));
 });

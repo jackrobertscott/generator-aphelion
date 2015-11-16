@@ -10,7 +10,7 @@ var help = require('./help');
 var config = require('./config');
 
 gulp.task('less', function() {
-  return gulp.src(help.src('.less'))
+  return gulp.src(help.filter(config.src, '.less'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(!!config.sourcemaps, sourcemaps.init()))
     .pipe(less())

@@ -2,7 +2,7 @@
   "paths": {
     "src": "./src",
     "tmp": "./.tmp",
-    "dest": "./dest"
+    "dist": "./dist"
   },
   "sourcemaps": false
 }

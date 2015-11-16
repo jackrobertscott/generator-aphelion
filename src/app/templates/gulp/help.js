@@ -11,9 +11,9 @@ help.plumb = function plumb(error) {
   this.emit('end'); // need this
 };
 
-help.src = function src(ext) {
+help.filter = function filter(dir, ext) {
   return [
-    path.join(config.paths.src, '**/*' + ext),
-    '!' + path.join(config.paths.src, '**/_*{/**,}'),
+    path.join(dir, '**/*' + ext),
+    '!' + path.join(dir, '**/_*{/**,}'),
   ];
 };

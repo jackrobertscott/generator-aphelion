@@ -9,7 +9,7 @@ var config = require('./config');
 var help = require('./help');
 
 gulp.task('es6', function() {
-  return gulp.src(help.src('.es6'))
+  return gulp.src(help.filter(config.src, '.es6'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(!!config.sourcemaps, sourcemaps.init()))
     .pipe(babel())

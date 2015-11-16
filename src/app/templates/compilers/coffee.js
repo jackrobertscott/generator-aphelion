@@ -9,7 +9,7 @@ var config = require('./config');
 var help = require('./help');
 
 gulp.task('coffee', function() {
-  return gulp.src(help.src('.coffee'))
+  return gulp.src(help.filter(config.src, '.coffee'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(!!config.sourcemaps, sourcemaps.init()))
     .pipe(coffee())

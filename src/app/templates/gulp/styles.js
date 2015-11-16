@@ -23,7 +23,7 @@ gulp.task('watch:styles', function() {<% if (css) { %>
 });<% if (css) { %>
 
 gulp.task('css', function() {
-  return gulp.src(help.src('.css'))
+  return gulp.src(help.filter(config.src, '.css'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(autoprefixer())
@@ -32,7 +32,7 @@ gulp.task('css', function() {
 });<% } %><% if (less) { %>
 
 gulp.task('less', function() {
-  return gulp.src(help.src('.less'))
+  return gulp.src(help.filter(config.src, '.less'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(less())
@@ -42,7 +42,7 @@ gulp.task('less', function() {
 });<% } %><% if (sass) { %>
 
 gulp.task('sass', function() {
-  return gulp.src(help.src('.{sass,scss}'))
+  return gulp.src(help.filter(config.src, '.{sass,scss}'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(sass())

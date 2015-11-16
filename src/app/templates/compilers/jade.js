@@ -9,7 +9,7 @@ var help = require('./help');
 var config = require('./config');
 
 gulp.task('jade', function() {
-  return gulp.src(help.src('.jade'))
+  return gulp.src(help.filter(config.src, '.jade'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
       return require(path.join(path.dirname(file.path), path.basename(file.path) + '.json'));

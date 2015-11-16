@@ -22,12 +22,12 @@ gulp.task('watch:scripts', function() {<% if (js) { %>
 });<% if (js) { %>
 
 gulp.task('js', function() {
-  return gulp.src(help.src('.js'))
+  return gulp.src(help.filter(config.src, '.js'))
     .pipe(gulp.dest(config.tmp));
 });<% } %><% if (coffee) { %>
 
 gulp.task('coffee', function() {
-  return gulp.src(help.src('.coffee'))
+  return gulp.src(help.filter(config.src, '.coffee'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(coffee())
@@ -36,7 +36,7 @@ gulp.task('coffee', function() {
 });<% } %><% if (es6) { %>
 
 gulp.task('es6', function() {
-  return gulp.src(help.src('.es6'))
+  return gulp.src(help.filter(config.src, '.es6'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(babel())
