@@ -2,7 +2,7 @@
 
 var path = require('path');
 var gutil = require('gulp-util');
-var config = require('./config');
+var config = require('../config');
 var help = module.exports = {};
 
 help.plumb = function plumb(error) {

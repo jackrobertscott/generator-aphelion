@@ -1,6 +1,7 @@
 {
   "private": true,
   "devDependencies": {
+    "browser-sync": "^2.10.0",
     "gulp": "^3.9.0",
     "gulp-if": "^2.0.0",<% if (css || less || sass) { %>
     "gulp-autoprefixer": "^3.1.0",<% } %><% if (less) { %>

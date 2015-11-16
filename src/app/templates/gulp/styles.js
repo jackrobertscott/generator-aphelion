@@ -7,7 +7,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var gulpif = require('gulp-if');<% } %><% if (less) { %>
 var less = require('gulp-less');<% } %><% if (sass) { %>
 var sass = require('gulp-sass');<% } %>
-
 var config = require('../config');
 var help = require('./help');
 
@@ -15,7 +14,13 @@ gulp.task('styles', [<% if (css) { %>
   'css'<% } %><% if (less) { %>
   'less'<% } %><% if (sass) { %>
   'sass'<% } %>
-]);<% if (css) { %>
+]);
+
+gulp.task('watch:styles', function() {<% if (css) { %>
+  gulp.watch(path.join(config.src, '**/*.css'), ['css', 'reload']);<% } %><% if (less) { %>
+  gulp.watch(path.join(config.src, '**/*.less'), ['less', 'reload']);<% } %><% if (sass) { %>
+  gulp.watch(path.join(config.src, '**/*.{sass,scss}'), ['sass', 'reload']);<% } %>
+});<% if (css) { %>
 
 gulp.task('css', function() {
   return gulp.src(help.src('.css'))

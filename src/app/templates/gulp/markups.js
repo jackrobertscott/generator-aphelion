@@ -6,7 +6,6 @@ var plumber = require('gulp-plumber');
 var data = require('gulp-data');<% } %><% if (jade) { %>
 var jade = require('gulp-jade');<% } %><% if (nunjucks) { %>
 var nunjucks = require('gulp-nunjucks-render');<% } %>
-
 var config = require('../config');
 var help = require('./help');
 
@@ -14,7 +13,13 @@ gulp.task('markups', [<% if (html) { %>
   'html'<% } %><% if (jade) { %>
   'jade'<% } %><% if (nunjucks) { %>
   'nunjucks'<% } %>
-]);<% if (html) { %>
+]);
+
+gulp.task('watch:markups', function() {<% if (html) { %>
+  gulp.watch(path.join(config.src, '**/*.html'), ['html', 'reload']);<% } %><% if (jade) { %>
+  gulp.watch(path.join(config.src, '**/*.jade'), ['jade', 'reload']);<% } %><% if (nunjucks) { %>
+  gulp.watch(path.join(config.src, '**/*.nunjucks'), ['nunjucks', 'reload']);<% } %>
+});<% if (html) { %>
 
 gulp.task('html', function() {
   return gulp.src(help.src('.html'))
@@ -34,7 +39,7 @@ gulp.task('jade', function() {
 });<% } %><% if (nunjucks) { %>
 
 gulp.task('nunjucks', function() {
-  return gulp.src(help.src('.{nj,nunjucks}'))
+  return gulp.src(help.src('.{nunjucks}'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
       return require(path.join(path.dirname(file.path), path.basename(file.path) + '.json'));

@@ -9,7 +9,7 @@ var help = require('./help');
 var config = require('./config');
 
 gulp.task('nunjucks', function() {
-  return gulp.src(help.src('.{nj,nunjucks}'))
+  return gulp.src(help.src('.{nunjucks}'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
       return require(path.join(path.dirname(file.path), path.basename(file.path) + '.json'));
