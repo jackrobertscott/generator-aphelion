@@ -2,6 +2,10 @@
 
 var gulp = require('gulp');
 var filter = require('gulp-filter');
+var concat = require('gulp-concat');
+var uglify = require('gulp-uglify');
+var csso = require('gulp-csso');
+var minify = require('gulp-minify-html');
 var del = require('del');
 var config = require('./config');
 var help = require('./gulp/help');
@@ -22,13 +26,19 @@ gulp.task('build', [
 
   return gulp.src(help.filter(config.tmp, ''))
     .pipe(htmlFilter)
-    // code...
+      .pipe(minify({
+        comments: true,
+        conditionals: true,
+        spare: true,
+      }))
     .pipe(htmlFilter.restore)
     .pipe(jsFilter)
-    // code...
+      .pipe(concat('scripts.min.js'))
+      .pipe(uglify())
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
-    // code...
+      .pipe(concat('styles.min.css'))
+      .pipe(csso())
     .pipe(cssFilter.restore)
     .pipe(gulp.dest(config.dist));
 });
