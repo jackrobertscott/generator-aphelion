@@ -20,6 +20,14 @@ gulp.task('serve', [
   }, cb);
 });
 
+gulp.task('serve:production', [
+  'build',
+], function(cb) {
+  browserSync.init({
+    server: config.dist,
+  }, cb);
+});
+
 gulp.task('reload', browserSync.reload);
 
 gulp.task('watch', [
