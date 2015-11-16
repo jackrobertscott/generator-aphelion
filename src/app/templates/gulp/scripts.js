@@ -9,22 +9,22 @@ var babel = require('gulp-babel');<% } %>
 var config = require('../config');
 var help = require('./help');
 
-gulp.task('scripts', [<% if (js) { %>
-  'js'<% } %><% if (coffee) { %>
-  'coffee'<% } %><% if (es6) { %>
-  'es6'<% } %>
+gulp.task('scripts', [
+  'js',<% if (coffee) { %>
+  'coffee',<% } %><% if (es6) { %>
+  'es6',<% } %>
 ]);
 
 gulp.task('watch:scripts', function() {<% if (js) { %>
   gulp.watch(path.join(config.src, '**/*.js'), ['js', 'reload']);<% } %><% if (coffee) { %>
   gulp.watch(path.join(config.src, '**/*.coffee'), ['coffee', 'reload']);<% } %><% if (es6) { %>
   gulp.watch(path.join(config.src, '**/*.es6'), ['es6', 'reload']);<% } %>
-});<% if (js) { %>
+});
 
 gulp.task('js', function() {
   return gulp.src(help.filter(config.src, '.js'))
     .pipe(gulp.dest(config.tmp));
-});<% } %><% if (coffee) { %>
+});<% if (coffee) { %>
 
 gulp.task('coffee', function() {
   return gulp.src(help.filter(config.src, '.coffee'))

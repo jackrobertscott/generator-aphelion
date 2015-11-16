@@ -54,7 +54,7 @@ module.exports = class Generator extends Base {
         return {
           type: 'checkbox',
           name: type,
-          message: 'Include which ' + type + ':',
+          message: 'Include extra ' + type + ' compilers:',
           choices: choices,
           when: !!choices.length,
         };

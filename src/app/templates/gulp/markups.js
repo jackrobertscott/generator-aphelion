@@ -9,22 +9,22 @@ var nunjucks = require('gulp-nunjucks-render');<% } %>
 var config = require('../config');
 var help = require('./help');
 
-gulp.task('markups', [<% if (html) { %>
-  'html'<% } %><% if (jade) { %>
-  'jade'<% } %><% if (nunjucks) { %>
-  'nunjucks'<% } %>
+gulp.task('markups', [
+  'html',<% if (jade) { %>
+  'jade',<% } %><% if (nunjucks) { %>
+  'nunjucks',<% } %>
 ]);
 
 gulp.task('watch:markups', function() {<% if (html) { %>
   gulp.watch(path.join(config.src, '**/*.html'), ['html', 'reload']);<% } %><% if (jade) { %>
   gulp.watch(path.join(config.src, '**/*.jade'), ['jade', 'reload']);<% } %><% if (nunjucks) { %>
   gulp.watch(path.join(config.src, '**/*.nunjucks'), ['nunjucks', 'reload']);<% } %>
-});<% if (html) { %>
+});
 
 gulp.task('html', function() {
   return gulp.src(help.filter(config.src, '.html'))
     .pipe(gulp.dest(config.tmp));
-});<% } %><% if (jade) { %>
+});<% if (jade) { %>
 
 gulp.task('jade', function() {
   return gulp.src(help.filter(config.src, '.jade'))

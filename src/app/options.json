@@ -1,8 +1,4 @@
 [{
-  "name": "html",
-  "type": "markups",
-  "pretty": "HTML"
-}, {
   "name": "jade",
   "type": "markups",
   "pretty": "Jade"
@@ -11,10 +7,6 @@
   "type": "markups",
   "pretty": "Nunjucks"
 }, {
-  "name": "css",
-  "type": "styles",
-  "pretty": "CSS"
-}, {
   "name": "less",
   "type": "styles",
   "pretty": "Less"
@@ -22,10 +14,6 @@
   "name": "sass",
   "type": "styles",
   "pretty": "SASS/SCSS"
-}, {
-  "name": "js",
-  "type": "scripts",
-  "pretty": "Vanilla JavaScript"
 }, {
   "name": "coffee",
   "type": "scripts",

@@ -10,17 +10,17 @@ var sass = require('gulp-sass');<% } %>
 var config = require('../config');
 var help = require('./help');
 
-gulp.task('styles', [<% if (css) { %>
-  'css'<% } %><% if (less) { %>
-  'less'<% } %><% if (sass) { %>
-  'sass'<% } %>
+gulp.task('styles', [
+  'css',<% if (less) { %>
+  'less',<% } %><% if (sass) { %>
+  'sass',<% } %>
 ]);
 
 gulp.task('watch:styles', function() {<% if (css) { %>
   gulp.watch(path.join(config.src, '**/*.css'), ['css', 'reload']);<% } %><% if (less) { %>
   gulp.watch(path.join(config.src, '**/*.less'), ['less', 'reload']);<% } %><% if (sass) { %>
   gulp.watch(path.join(config.src, '**/*.{sass,scss}'), ['sass', 'reload']);<% } %>
-});<% if (css) { %>
+});
 
 gulp.task('css', function() {
   return gulp.src(help.filter(config.src, '.css'))
@@ -29,7 +29,7 @@ gulp.task('css', function() {
     .pipe(autoprefixer())
     .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
     .pipe(gulp.dest(config.tmp));
-});<% } %><% if (less) { %>
+});<% if (less) { %>
 
 gulp.task('less', function() {
   return gulp.src(help.filter(config.src, '.less'))
