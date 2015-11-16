@@ -22,14 +22,6 @@ gulp.task('serve', [
 
 gulp.task('reload', browserSync.reload);
 
-gulp.task('compile', [
-  'markups',
-  'scripts',
-  'styles',
-  'images',
-  'other',
-]);
-
 gulp.task('watch', [
   'watch:markups',
   'watch:scripts',

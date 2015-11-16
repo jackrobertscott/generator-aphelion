@@ -13,6 +13,7 @@
     "gulp-jade": "^1.1.0",<% } %><% if (nunjucks) { %>
     "gulp-nunjucks-render": "^1.0.0",<% } %>
     "gulp-util": "^3.0.7",
+    "gulp-filter": "^3.0.1",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-plumber": "^1.0.1"
   }
