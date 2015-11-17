@@ -76,7 +76,7 @@ module.exports = class Generator extends Base {
   }
 
   writing() {
-    this._copyFile('.gitignore');
+    this._copyFile('_.gitignore', '.gitignore');
     this._copyFile('_bower.json', 'bower.json');
     this._templateFile('_package.json', 'package.json', this.data);
     this._copyFile('config.json');
