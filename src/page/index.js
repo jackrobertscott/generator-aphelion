@@ -7,7 +7,7 @@ module.exports = class Generator extends Base {
   constructor() {
     super(...arguments);
 
-    this.option('no-message', {
+    this.option('skip-message', {
       desc: 'Skips the welcome message',
       type: Boolean,
     });
@@ -44,7 +44,7 @@ module.exports = class Generator extends Base {
   prompting() {
     let done = this.async();
 
-    if (!this.options['no-message']) {
+    if (!this.options['skip-message']) {
       this.log(yosay('Let\'s make a new page.'));
     }
 

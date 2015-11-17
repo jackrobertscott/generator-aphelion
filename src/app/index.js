@@ -7,22 +7,12 @@ module.exports = class Generator extends Base {
   constructor() {
     super(...arguments);
 
-    this.option('no-message', {
+    this.option('skip-message', {
       desc: 'Skips the welcome message',
       type: Boolean,
     });
 
-    this.option('no-install', {
-      desc: 'Skips the installation of dependencies',
-      type: Boolean,
-    });
-
-    this.option('no-install-message', {
-      desc: 'Skips the message after the installation of dependencies',
-      type: Boolean,
-    });
-
-    this.option('no-page', {
+    this.option('skip-page', {
       desc: 'Skips the message after the installation of dependencies',
       type: Boolean,
     });
@@ -38,7 +28,7 @@ module.exports = class Generator extends Base {
   prompting() {
     let done = this.async();
 
-    if (!this.options['no-message']) {
+    if (!this.options['skip-message']) {
       this.log(yosay('Allo! Allo! This is the aphelion website generator.'));
     }
 
@@ -92,10 +82,10 @@ module.exports = class Generator extends Base {
     this._templateFile('gulpfile.js', this.data);
     this._templateDirectory('gulp', this.data);
 
-    if (!this.options['no-page']) {
+    if (!this.options['skip-page']) {
       this.composeWith('aphelion:page', {
         options: {
-          'no-message': true,
+          'skip-message': true,
           path: '',
           markups: (this.data.jade) ? 'jade' : (this.data.nunjucks) ? 'nunjucks' : 'html',
           styles: (this.data.less) ? 'less' : (this.data.sass) ? 'scss' : 'css',
@@ -107,10 +97,6 @@ module.exports = class Generator extends Base {
   }
 
   install() {
-    if (!this.options['no-install']) {
-      this.installDependencies({
-        skipMessage: this.options['no-install-message'],
-      });
-    }
+    this.installDependencies();
   }
 };
