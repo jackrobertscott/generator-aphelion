@@ -119,7 +119,7 @@ describe('aphelion:app', function() {
       });
     });
   });
-  
+
   describe('with no extra features', function() {
     describe('passing options', function() {
       before(function(done) {

@@ -16,7 +16,7 @@ describe('aphelion:page', function() {
           styles: 'sass',
         };
         helpers.run(path.join(__dirname, '../generators/page'))
-          .inTmpDir(function (dir) {
+          .inTmpDir(function(dir) {
             fs.copySync(path.join(__dirname, 'common'), dir);
           })
           .withOptions(this.options)
@@ -41,7 +41,7 @@ describe('aphelion:page', function() {
           styles: 'less',
         };
         helpers.run(path.join(__dirname, '../generators/page'))
-          .inTmpDir(function (dir) {
+          .inTmpDir(function(dir) {
             fs.copySync(path.join(__dirname, 'common'), dir);
           })
           .withOptions(this.options)
@@ -66,7 +66,7 @@ describe('aphelion:page', function() {
           styles: 'scss',
         };
         helpers.run(path.join(__dirname, '../generators/page'))
-          .inTmpDir(function (dir) {
+          .inTmpDir(function(dir) {
             fs.copySync(path.join(__dirname, 'common'), dir);
           })
           .withOptions(this.options)
@@ -91,7 +91,7 @@ describe('aphelion:page', function() {
           styles: 'css',
         };
         helpers.run(path.join(__dirname, '../generators/page'))
-          .inTmpDir(function (dir) {
+          .inTmpDir(function(dir) {
             fs.copySync(path.join(__dirname, 'common'), dir);
           })
           .withOptions(this.options)
@@ -116,7 +116,7 @@ describe('aphelion:page', function() {
           styles: 'sass',
         };
         helpers.run(path.join(__dirname, '../generators/page'))
-          .inTmpDir(function (dir) {
+          .inTmpDir(function(dir) {
             fs.copySync(path.join(__dirname, 'common'), dir);
           })
           .withPrompts(this.prompts)
@@ -141,7 +141,7 @@ describe('aphelion:page', function() {
           styles: 'less',
         };
         helpers.run(path.join(__dirname, '../generators/page'))
-          .inTmpDir(function (dir) {
+          .inTmpDir(function(dir) {
             fs.copySync(path.join(__dirname, 'common'), dir);
           })
           .withPrompts(this.prompts)
@@ -166,7 +166,7 @@ describe('aphelion:page', function() {
           styles: 'scss',
         };
         helpers.run(path.join(__dirname, '../generators/page'))
-          .inTmpDir(function (dir) {
+          .inTmpDir(function(dir) {
             fs.copySync(path.join(__dirname, 'common'), dir);
           })
           .withPrompts(this.prompts)
@@ -191,7 +191,7 @@ describe('aphelion:page', function() {
           styles: 'css',
         };
         helpers.run(path.join(__dirname, '../generators/page'))
-          .inTmpDir(function (dir) {
+          .inTmpDir(function(dir) {
             fs.copySync(path.join(__dirname, 'common'), dir);
           })
           .withPrompts(this.prompts)
