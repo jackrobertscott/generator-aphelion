@@ -10,3 +10,7 @@ pids
 # Dependency directories
 node_modules
 bower_components
+
+# Build
+.tmp
+dist
