@@ -12,19 +12,19 @@ module.exports = class Generator extends Base {
       type: Boolean,
     });
 
-    this.option('path', {
-      desc: 'Path to location of page files',
-      type: String
-    });
-
     this.option('markups', {
       desc: 'Which markup compiler to use in page',
-      type: String
+      type: String,
     });
 
     this.option('styles', {
       desc: 'Which style compiler to use in page',
-      type: String
+      type: String,
+    });
+
+    this.option('path', {
+      desc: 'Path to location of page files',
+      type: String,
     });
   }
 
@@ -36,6 +36,9 @@ module.exports = class Generator extends Base {
       yorc: this.config.getAll(),
       site: this.fs.readJSON(this.destinationPath('config.json'), {}),
     };
+    if (!this.data.site.paths || !this.data.site.paths.src) {
+      throw new Error('must have config.json file with paths.src attribute');
+    }
   }
 
   prompting() {
@@ -94,7 +97,7 @@ module.exports = class Generator extends Base {
   }
 
   writing() {
-    let out = path.join(this.data.site.src || 'src', this.data.path);
+    let out = path.join(this.data.site.paths.src, this.data.path);
     switch (this.data.markups) {
       case 'jade':
         this._copyDirectory('jade', out);

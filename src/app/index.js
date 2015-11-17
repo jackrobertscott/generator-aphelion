@@ -96,6 +96,7 @@ module.exports = class Generator extends Base {
       this.composeWith('aphelion:page', {
         options: {
           'no-message': true,
+          path: '',
           markups: (this.data.jade) ? 'jade' : (this.data.nunjucks) ? 'nunjucks' : 'html',
           styles: (this.data.less) ? 'less' : (this.data.sass) ? 'scss' : 'css',
         }
