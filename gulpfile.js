@@ -15,7 +15,9 @@ gulp.task('clean', function() {
 });
 
 gulp.task('compile', ['clean'], function() {
-  return gulp.src(path.join(config.src, '**'))
+  return gulp.src(path.join(config.src, '**'), {
+      dot: true
+    })
     .pipe(babel({
       presets: ['es2015'],
       ignore: [

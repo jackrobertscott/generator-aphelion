@@ -29,10 +29,8 @@ module.exports = class Generator extends Base {
       markups: this.options.markups,
       styles: this.options.styles,
       yorc: this.config.getAll(),
+      site: this.fs.readJSON(this.destinationPath('config.json'), {}),
     };
-    if (this.fs.exists(this.destinationPath('config.json'))) {
-      this.data = this.fs.readJSON(this.destinationPath('config.json'));
-    }
   }
 
   prompting() {
