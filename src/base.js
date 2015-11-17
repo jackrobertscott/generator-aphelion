@@ -8,6 +8,9 @@ module.exports = class GeneratorBase extends Base {
   }
 
   _copyFile(src, dest) {
+    if (!dest) {
+      dest = src;
+    }
     this.fs.copy(
       this.templatePath(src),
       this.destinationPath(dest)
@@ -15,6 +18,10 @@ module.exports = class GeneratorBase extends Base {
   }
 
   _templateFile(src, dest, data) {
+    if (typeof dest !== 'string') {
+      data = dest;
+      dest = src;
+    }
     this.fs.copyTpl(
       this.templatePath(src),
       this.destinationPath(dest),
@@ -23,6 +30,9 @@ module.exports = class GeneratorBase extends Base {
   }
 
   _copyDirectory(src, dest) {
+    if (!dest) {
+      dest = src;
+    }
     this._prepareFiles(src, dest, (files) => {
       files.forEach((file) => {
         this.fs.copy(file.src, file.dest);
@@ -31,6 +41,10 @@ module.exports = class GeneratorBase extends Base {
   }
 
   _templateDirectory(src, dest, data) {
+    if (typeof dest !== 'string') {
+      data = dest;
+      dest = src;
+    }
     this._prepareFiles(src, dest, (files) => {
       files.forEach((file) => {
         this.fs.copyTpl(file.src, file.dest, data);

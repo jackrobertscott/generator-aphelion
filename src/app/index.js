@@ -85,10 +85,11 @@ module.exports = class Generator extends Base {
   }
 
   writing() {
-    this._copyFile('config.json', 'config.json');
+    this._copyFile('config.json');
+    this._copyFile('.gitignore');
     this._templateFile('_package.json', 'package.json', this.data);
-    this._templateFile('gulpfile.js', 'gulpfile.js', this.data);
-    this._templateDirectory('gulp', 'gulp', this.data);
+    this._templateFile('gulpfile.js', this.data);
+    this._templateDirectory('gulp', this.data);
 
     if (!this.options['no-page']) {
       this.composeWith('aphelion:page', {
