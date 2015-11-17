@@ -48,6 +48,35 @@ module.exports = class Generator extends Base {
       this.log(yosay('Let\'s make a new page.'));
     }
 
+    let markups = [{
+      name: 'HTML',
+      value: 'html',
+    }, {
+      name: 'Jade',
+      value: 'jade',
+    }, {
+      name: 'Nunjucks',
+      value: 'nunjucks',
+    }].filter((markup) => {
+      return typeof this.data.yorc[markup.value] === 'undefined' || this.data.yorc[markup.value];
+    });
+
+    let styles = [{
+      name: 'CSS',
+      value: 'css',
+    }, {
+      name: 'SASS',
+      value: 'sass',
+    }, {
+      name: 'SCSS',
+      value: 'scss',
+    }, {
+      name: 'Less',
+      value: 'less',
+    }].filter((style) => {
+      return typeof this.data.yorc[style.value] === 'undefined' || this.data.yorc[style.value];
+    });
+
     const prompts = [{
       type: 'input',
       name: 'path',
@@ -58,39 +87,25 @@ module.exports = class Generator extends Base {
       type: 'list',
       name: 'markups',
       message: 'Page markup type:',
-      choices: [{
-        value: 'html',
-        name: 'HTML',
-      }, {
-        value: 'jade',
-        name: 'Jade',
-      }, {
-        value: 'nunjucks',
-        name: 'Nunjucks',
-      }],
-      when: !this.data.markups || ['html', 'jade', 'nunjucks'].indexOf(this.data.markups) === -1,
+      choices: markups,
+      when: (!this.data.markups ||
+        ['html', 'jade', 'nunjucks'].indexOf(this.data.markups) === -1) &&
+        markups.length > 1,
     }, {
       type: 'list',
       name: 'styles',
       message: 'Page style type:',
-      choices: [{
-        value: 'css',
-        name: 'CSS',
-      }, {
-        value: 'sass',
-        name: 'SASS',
-      }, {
-        value: 'scss',
-        name: 'SCSS',
-      }, {
-        value: 'less',
-        name: 'Less',
-      }],
-      when: !this.data.styles || ['css', 'sass', 'scss', 'less'].indexOf(this.data.styles) === -1,
+      choices: styles,
+      when: (!this.data.styles ||
+        ['css', 'sass', 'scss', 'less'].indexOf(this.data.styles) === -1) &&
+        styles.length > 1,
     }];
 
     this.prompt(prompts, (answers) => {
       _.assign(this.data, answers);
+
+      if (!this.data.markups) this.data.markups = markups[0].value;
+      if (!this.data.styles) this.data.styles = styles[0].value;
 
       done();
     });

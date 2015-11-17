@@ -71,6 +71,7 @@ module.exports = class Generator extends Base {
   }
 
   configuring() {
+    this.data.scss = this.data.sass;
     this.config.set(this.data);
   }
 
@@ -88,7 +89,7 @@ module.exports = class Generator extends Base {
           'skip-message': true,
           path: '',
           markups: (this.data.jade) ? 'jade' : (this.data.nunjucks) ? 'nunjucks' : 'html',
-          styles: (this.data.less) ? 'less' : (this.data.sass) ? 'scss' : 'css',
+          styles: (this.data.sass) ? 'scss' : (this.data.less) ? 'less' : 'css',
         }
       }, {
         local: require.resolve('../page'),
