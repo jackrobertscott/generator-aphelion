@@ -19,14 +19,14 @@ gulp.task('styles', [
 ]);
 
 gulp.task('watch:styles', function() {
-  gulp.watch(path.join(config.paths.src, '**/*.css'), function(cb) {
-    sequence('css', 'reload', cb);
+  gulp.watch(path.join(config.paths.src, '**/*.css'), function() {
+    sequence('css', 'reload');
   });<% if (less) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.less'), function(cb) {
-    sequence('less', 'reload', cb);
+  gulp.watch(path.join(config.paths.src, '**/*.less'), function() {
+    sequence('less', 'reload');
   });<% } %><% if (sass) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.{sass,scss}'), function(cb) {
-    sequence('sass', 'reload', cb);
+  gulp.watch(path.join(config.paths.src, '**/*.{sass,scss}'), function() {
+    sequence('sass', 'reload');
   });<% } %>
 });
 

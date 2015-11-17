@@ -17,3 +17,8 @@ help.filter = function filter(dir, ext) {
     '!' + path.join(dir, '**/_*{/**,}'),
   ];
 };
+
+help.requireUncached = function requireUncached(module) {
+    delete require.cache[require.resolve(module)];
+    return require(module);
+};

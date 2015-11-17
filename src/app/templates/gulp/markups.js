@@ -17,14 +17,14 @@ gulp.task('markups', [
 ]);
 
 gulp.task('watch:markups', function() {
-  gulp.watch(path.join(config.paths.src, '**/*.html'), function(cb) {
-    sequence('html', 'inject:compile', 'reload', cb);
+  gulp.watch(path.join(config.paths.src, '**/*.{html,json}'), function() {
+    sequence('html', 'inject:compile', 'reload');
   });<% if (jade) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.jade'), function(cb) {
-    sequence('jade', 'inject:compile', 'reload', cb);
+  gulp.watch(path.join(config.paths.src, '**/*.{jade,json}'), function() {
+    sequence('jade', 'inject:compile', 'reload');
   });<% } %><% if (nunjucks) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.nunjucks'), function(cb) {
-    sequence('nunjucks', 'inject:compile', 'reload', cb);
+  gulp.watch(path.join(config.paths.src, '**/*.{nunjucks,json}'), function() {
+    sequence('nunjucks', 'inject:compile', 'reload');
   });<% } %>
 });
 
@@ -38,7 +38,7 @@ gulp.task('jade', function() {
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
       try {
-        return require(path.join(path.dirname(file.path), path.basename(file.path, path.extname(file.path)) + '.json'));
+        return help.requireUncached(path.join(path.dirname(file.path), path.basename(file.path, path.extname(file.path)) + '.json'));
       } catch(e) {}
     }))
     .pipe(jade({
@@ -51,7 +51,7 @@ gulp.task('nunjucks', function() {
   return gulp.src(help.filter(config.paths.src, '.nunjucks'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
-      return require(path.join(path.dirname(file.path), path.basename(file.path, path.extname(file.path)) + '.json'));
+      return help.requireUncached(path.join(path.dirname(file.path), path.basename(file.path, path.extname(file.path)) + '.json'));
     }))
     .pipe(nunjucks())
     .pipe(gulp.dest(config.paths.tmp));

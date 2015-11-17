@@ -18,14 +18,14 @@ gulp.task('scripts', [
 ]);
 
 gulp.task('watch:scripts', function() {
-  gulp.watch(path.join(config.paths.src, '**/*.js'), function(cb) {
-    sequence('js', 'reload', cb);
+  gulp.watch(path.join(config.paths.src, '**/*.js'), function() {
+    sequence('js', 'reload');
   });<% if (coffee) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.coffee'), function(cb) {
-    sequence('coffee', 'reload', cb);
+  gulp.watch(path.join(config.paths.src, '**/*.coffee'), function() {
+    sequence('coffee', 'reload');
   });<% } %><% if (es6) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.es6'), function(cb) {
-    sequence('es6', 'reload', cb);
+  gulp.watch(path.join(config.paths.src, '**/*.es6'), function() {
+    sequence('es6', 'reload');
   });<% } %>
 });
 

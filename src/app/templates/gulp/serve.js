@@ -26,7 +26,7 @@ gulp.task('watch', [
   'watch:other',
 ]);
 
-gulp.task('serve:production', [
+gulp.task('serve:build', [
   'build',
 ], function(cb) {
   sequence('browser-sync:build', cb);
@@ -38,4 +38,6 @@ gulp.task('browser-sync:build', function(cb) {
   }, cb);
 });
 
-gulp.task('reload', browserSync.reload);
+gulp.task('reload', function() {
+  browserSync.reload();
+});
