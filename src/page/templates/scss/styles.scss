@@ -1,0 +1,21 @@
+$primary: #FF1053;
+$secondary: #6C6EA0;
+$tint: #66C7F4;
+$dark: #C1CAD6;
+$light: #FFFFFF;
+
+body {
+  background-color: $light;
+  color: $dark;
+}
+
+h1 {
+  font-size: 60px;
+  color: $primary;
+  text-shadow: 2px 2px $secondary;
+}
+
+p {
+  font-size: 16px;
+  color: darken($tint, 20%);
+}

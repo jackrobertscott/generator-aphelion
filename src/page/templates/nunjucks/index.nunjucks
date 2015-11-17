@@ -1,0 +1,10 @@
+{% extends "_layout.html" %}
+
+{% block title %}
+Page Title
+{% endblock %}
+
+{% block content %}
+<h1>Allo! Welcome to the Aphelion Generator!</h1>
+<p>We are very pleased to have you.</p>
+{% endblock %}

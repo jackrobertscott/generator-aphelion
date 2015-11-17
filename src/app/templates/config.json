@@ -1,0 +1,9 @@
+{
+  "paths": {
+    "src": "./src",
+    "tmp": "./.tmp",
+    "dist": "./dist"
+  },
+  "cname": "",
+  "sourcemaps": false
+}
