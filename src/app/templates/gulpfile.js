@@ -16,7 +16,7 @@ gulp.task('serve', [
   'watch',
 ], function(cb) {
   browserSync.init({
-    server: config.tmp,
+    server: config.paths.tmp,
   }, cb);
 });
 
@@ -24,7 +24,7 @@ gulp.task('serve:production', [
   'build',
 ], function(cb) {
   browserSync.init({
-    server: config.dist,
+    server: config.paths.dist,
   }, cb);
 });
 

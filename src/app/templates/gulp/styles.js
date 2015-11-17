@@ -18,22 +18,22 @@ gulp.task('styles', [
 ]);
 
 gulp.task('watch:styles', function() {
-  gulp.watch(path.join(config.src, '**/*.css'), ['css', 'reload']);<% if (less) { %>
-  gulp.watch(path.join(config.src, '**/*.less'), ['less', 'reload']);<% } %><% if (sass) { %>
-  gulp.watch(path.join(config.src, '**/*.{sass,scss}'), ['sass', 'reload']);<% } %>
+  gulp.watch(path.join(config.paths.src, '**/*.css'), ['css', 'reload']);<% if (less) { %>
+  gulp.watch(path.join(config.paths.src, '**/*.less'), ['less', 'reload']);<% } %><% if (sass) { %>
+  gulp.watch(path.join(config.paths.src, '**/*.{sass,scss}'), ['sass', 'reload']);<% } %>
 });
 
 gulp.task('css', function() {
-  return gulp.src(help.filter(config.src, '.css'))
+  return gulp.src(help.filter(config.paths.src, '.css'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(autoprefixer())
     .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
-    .pipe(gulp.dest(config.tmp));
+    .pipe(gulp.dest(config.paths.tmp));
 });<% if (less) { %>
 
 gulp.task('less', function() {
-  return gulp.src(help.filter(config.src, '.less'))
+  return gulp.src(help.filter(config.paths.src, '.less'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(less())
@@ -43,7 +43,7 @@ gulp.task('less', function() {
 });<% } %><% if (sass) { %>
 
 gulp.task('sass', function() {
-  return gulp.src(help.filter(config.src, '.{sass,scss}'))
+  return gulp.src(help.filter(config.paths.src, '.{sass,scss}'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(sass())

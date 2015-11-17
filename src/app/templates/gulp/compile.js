@@ -22,26 +22,26 @@ gulp.task('compile', ['clean:compile'], function(cb) {
 
 gulp.task('bower', function() {
   return gulp.src(bowerFiles())
-    .pipe(gulp.dest(path.join(config.tmp, 'vendor')));
+    .pipe(gulp.dest(path.join(config.paths.tmp, 'vendor')));
 });
 
 gulp.task('inject:compile', function() {
   var sources = gulp.src([
-    path.join(config.tmp, '**/*.js'),
-    path.join(config.tmp, '**/*.css'),
-    '!' + path.join(config.tmp, 'vendor/*.js'),
-    '!' + path.join(config.tmp, 'vendor/*.css'),
+    path.join(config.paths.tmp, '**/*.js'),
+    path.join(config.paths.tmp, '**/*.css'),
+    '!' + path.join(config.paths.tmp, 'vendor/*.js'),
+    '!' + path.join(config.paths.tmp, 'vendor/*.css'),
   ], {
     read: false,
   });
   var vendor = gulp.src([
-    path.join(config.tmp, 'vendor/*.js'),
-    path.join(config.tmp, 'vendor/*.css'),
+    path.join(config.paths.tmp, 'vendor/*.js'),
+    path.join(config.paths.tmp, 'vendor/*.css'),
   ], {
     read: false,
   });
 
-  return gulp.src(path.join(config.tmp, '**/*.html'))
+  return gulp.src(path.join(config.paths.tmp, '**/*.html'))
     .pipe(inject(sources, {
       relative: true,
     }))
@@ -49,9 +49,9 @@ gulp.task('inject:compile', function() {
       relative: true,
       name: 'bower',
     }))
-    .pipe(gulp.dest(config.tmp));
+    .pipe(gulp.dest(config.paths.tmp));
 });
 
 gulp.task('clean:compile', function() {
-  return del(config.tmp);
+  return del(config.paths.tmp);
 });

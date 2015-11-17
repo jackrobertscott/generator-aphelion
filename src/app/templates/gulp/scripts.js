@@ -17,30 +17,30 @@ gulp.task('scripts', [
 ]);
 
 gulp.task('watch:scripts', function() {
-  gulp.watch(path.join(config.src, '**/*.js'), ['js', 'reload']);<% if (coffee) { %>
-  gulp.watch(path.join(config.src, '**/*.coffee'), ['coffee', 'reload']);<% } %><% if (es6) { %>
-  gulp.watch(path.join(config.src, '**/*.es6'), ['es6', 'reload']);<% } %>
+  gulp.watch(path.join(config.paths.src, '**/*.js'), ['js', 'reload']);<% if (coffee) { %>
+  gulp.watch(path.join(config.paths.src, '**/*.coffee'), ['coffee', 'reload']);<% } %><% if (es6) { %>
+  gulp.watch(path.join(config.paths.src, '**/*.es6'), ['es6', 'reload']);<% } %>
 });
 
 gulp.task('js', function() {
-  return gulp.src(help.filter(config.src, '.js'))
-    .pipe(gulp.dest(config.tmp));
+  return gulp.src(help.filter(config.paths.src, '.js'))
+    .pipe(gulp.dest(config.paths.tmp));
 });<% if (coffee) { %>
 
 gulp.task('coffee', function() {
-  return gulp.src(help.filter(config.src, '.coffee'))
+  return gulp.src(help.filter(config.paths.src, '.coffee'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(coffee())
     .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
-    .pipe(gulp.dest(config.tmp));
+    .pipe(gulp.dest(config.paths.tmp));
 });<% } %><% if (es6) { %>
 
 gulp.task('es6', function() {
-  return gulp.src(help.filter(config.src, '.es6'))
+  return gulp.src(help.filter(config.paths.src, '.es6'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
     .pipe(babel())
     .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
-    .pipe(gulp.dest(config.tmp));
+    .pipe(gulp.dest(config.paths.tmp));
 });<% } %>

@@ -36,7 +36,7 @@ gulp.task('compress', [
     restore: true,
   });
 
-  return gulp.src(help.filter(config.tmp, ''))
+  return gulp.src(help.filter(config.paths.tmp, ''))
     .pipe(htmlFilter)
       .pipe(minify({
         comments: true,
@@ -60,26 +60,26 @@ gulp.task('compress', [
       .pipe(concat('vendor.min.css'))
       .pipe(csso())
     .pipe(cssVendor.restore)
-    .pipe(gulp.dest(config.dist));
+    .pipe(gulp.dest(config.paths.dist));
 });
 
 gulp.task('inject:build', function() {
   var sources = gulp.src([
-    path.join(config.dist, '**/*.js'),
-    path.join(config.dist, '**/*.css'),
-    '!' + path.join(config.dist, 'vendor/*.js'),
-    '!' + path.join(config.dist, 'vendor/*.css'),
+    path.join(config.paths.dist, '**/*.js'),
+    path.join(config.paths.dist, '**/*.css'),
+    '!' + path.join(config.paths.dist, 'vendor/*.js'),
+    '!' + path.join(config.paths.dist, 'vendor/*.css'),
   ], {
     read: false,
   });
   var vendor = gulp.src([
-    path.join(config.dist, 'vendor/*.js'),
-    path.join(config.dist, 'vendor/*.css'),
+    path.join(config.paths.dist, 'vendor/*.js'),
+    path.join(config.paths.dist, 'vendor/*.css'),
   ], {
     read: false,
   });
 
-  return gulp.src(path.join(config.dist, '**/*.html'))
+  return gulp.src(path.join(config.paths.dist, '**/*.html'))
     .pipe(inject(sources, {
       relative: true,
     }))
@@ -87,9 +87,9 @@ gulp.task('inject:build', function() {
       relative: true,
       name: 'bower',
     }))
-    .pipe(gulp.dest(config.dist));
+    .pipe(gulp.dest(config.paths.dist));
 });
 
 gulp.task('clean:build', function() {
-  return del(config.dist);
+  return del(config.paths.dist);
 });

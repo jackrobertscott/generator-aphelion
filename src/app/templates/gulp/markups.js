@@ -16,18 +16,18 @@ gulp.task('markups', [
 ]);
 
 gulp.task('watch:markups', function() {
-  gulp.watch(path.join(config.src, '**/*.html'), ['html', 'reload']);<% if (jade) { %>
-  gulp.watch(path.join(config.src, '**/*.jade'), ['jade', 'reload']);<% } %><% if (nunjucks) { %>
-  gulp.watch(path.join(config.src, '**/*.nunjucks'), ['nunjucks', 'reload']);<% } %>
+  gulp.watch(path.join(config.paths.src, '**/*.html'), ['html', 'reload']);<% if (jade) { %>
+  gulp.watch(path.join(config.paths.src, '**/*.jade'), ['jade', 'reload']);<% } %><% if (nunjucks) { %>
+  gulp.watch(path.join(config.paths.src, '**/*.nunjucks'), ['nunjucks', 'reload']);<% } %>
 });
 
 gulp.task('html', function() {
-  return gulp.src(help.filter(config.src, '.html'))
-    .pipe(gulp.dest(config.tmp));
+  return gulp.src(help.filter(config.paths.src, '.html'))
+    .pipe(gulp.dest(config.paths.tmp));
 });<% if (jade) { %>
 
 gulp.task('jade', function() {
-  return gulp.src(help.filter(config.src, '.jade'))
+  return gulp.src(help.filter(config.paths.src, '.jade'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
       try {
@@ -41,7 +41,7 @@ gulp.task('jade', function() {
 });<% } %><% if (nunjucks) { %>
 
 gulp.task('nunjucks', function() {
-  return gulp.src(help.filter(config.src, '.nunjucks'))
+  return gulp.src(help.filter(config.paths.src, '.nunjucks'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
       return require(path.join(path.dirname(file.path), path.basename(file.path, path.extname(file.path)) + '.json'));

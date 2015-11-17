@@ -7,11 +7,11 @@ var config = require('../config');
 var help = require('./help');
 
 gulp.task('images', function() {
-  return gulp.src(help.filter(config.src, '.{gif,jpeg,jpg,png,svg}'))
+  return gulp.src(help.filter(config.paths.src, '.{gif,jpeg,jpg,png,svg}'))
     .pipe(imagemin())
     .pipe(gulp.dest(config.paths.tmp));
 });
 
 gulp.task('watch:images', function() {
-  gulp.watch(path.join(config.src, '**/*.{gif,jpeg,jpg,png,svg}'), ['images', 'reload']);
+  gulp.watch(path.join(config.paths.src, '**/*.{gif,jpeg,jpg,png,svg}'), ['images', 'reload']);
 });
