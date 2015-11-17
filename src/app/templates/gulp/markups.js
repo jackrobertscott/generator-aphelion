@@ -17,13 +17,13 @@ gulp.task('markups', [
 ]);
 
 gulp.task('watch:markups', function() {
-  gulp.watch(path.join(config.paths.src, '**/*.{html,json}'), function() {
+  gulp.watch(path.join(config.paths.src, '**/*.html'), function() {
     sequence('html', 'inject:compile', 'reload');
   });<% if (jade) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.{jade,json}'), function() {
+  gulp.watch(path.join(config.paths.src, '**/*.jade'), function() {
     sequence('jade', 'inject:compile', 'reload');
   });<% } %><% if (nunjucks) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.{nunjucks,json}'), function() {
+  gulp.watch(path.join(config.paths.src, '**/*.nunjucks'), function() {
     sequence('nunjucks', 'inject:compile', 'reload');
   });<% } %>
 });
