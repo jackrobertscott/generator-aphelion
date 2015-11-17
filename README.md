@@ -1,4 +1,4 @@
-# generator-aphelion
+# generator-aphelion [![Build Status](https://travis-ci.org/jackrobertscott/generator-aphelion.svg)](https://travis-ci.org/jackrobertscott/generator-aphelion)
 > Generator for capable static websites
 
 ## Installation
