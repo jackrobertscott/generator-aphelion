@@ -55,7 +55,7 @@ module.exports = class Generator extends Base {
       default: 'example',
       when: !this.data.path,
     }, {
-      type: 'checkbox',
+      type: 'list',
       name: 'markups',
       message: 'Page markup type:',
       choices: [{
@@ -70,7 +70,7 @@ module.exports = class Generator extends Base {
       }],
       when: !this.data.markups || ['html', 'jade', 'nunjucks'].indexOf(this.data.markups) === -1,
     }, {
-      type: 'checkbox',
+      type: 'list',
       name: 'styles',
       message: 'Page style type:',
       choices: [{

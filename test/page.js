@@ -106,4 +106,104 @@ describe('aphelion:page', function() {
       });
     });
   });
+  describe('passing prompts', function() {
+    describe('jade + sass', function() {
+      before(function(done) {
+        this.site = fs.readJsonSync(path.join(__dirname, 'common', 'config.json'));
+        this.prompts = {
+          path: 'page',
+          markups: 'jade',
+          styles: 'sass',
+        };
+        helpers.run(path.join(__dirname, '../generators/page'))
+          .inTmpDir(function (dir) {
+            fs.copySync(path.join(__dirname, 'common'), dir);
+          })
+          .withPrompts(this.prompts)
+          .on('end', done);
+      });
+
+      it('creates page files', function() {
+        assert.file([
+          path.join(this.site.paths.src, this.prompts.path, '_layout.jade'),
+          path.join(this.site.paths.src, this.prompts.path, 'index.jade'),
+          path.join(this.site.paths.src, this.prompts.path, 'styles.sass'),
+        ]);
+      });
+    });
+
+    describe('jade + less', function() {
+      before(function(done) {
+        this.site = fs.readJsonSync(path.join(__dirname, 'common', 'config.json'));
+        this.prompts = {
+          path: 'page',
+          markups: 'jade',
+          styles: 'less',
+        };
+        helpers.run(path.join(__dirname, '../generators/page'))
+          .inTmpDir(function (dir) {
+            fs.copySync(path.join(__dirname, 'common'), dir);
+          })
+          .withPrompts(this.prompts)
+          .on('end', done);
+      });
+
+      it('creates page files', function() {
+        assert.file([
+          path.join(this.site.paths.src, this.prompts.path, '_layout.jade'),
+          path.join(this.site.paths.src, this.prompts.path, 'index.jade'),
+          path.join(this.site.paths.src, this.prompts.path, 'styles.less'),
+        ]);
+      });
+    });
+
+    describe('nunjucks + scss', function() {
+      before(function(done) {
+        this.site = fs.readJsonSync(path.join(__dirname, 'common', 'config.json'));
+        this.prompts = {
+          path: 'page',
+          markups: 'nunjucks',
+          styles: 'scss',
+        };
+        helpers.run(path.join(__dirname, '../generators/page'))
+          .inTmpDir(function (dir) {
+            fs.copySync(path.join(__dirname, 'common'), dir);
+          })
+          .withPrompts(this.prompts)
+          .on('end', done);
+      });
+
+      it('creates page files', function() {
+        assert.file([
+          path.join(this.site.paths.src, this.prompts.path, '_layout.nunjucks'),
+          path.join(this.site.paths.src, this.prompts.path, 'index.nunjucks'),
+          path.join(this.site.paths.src, this.prompts.path, 'styles.scss'),
+        ]);
+      });
+    });
+
+    describe('html + css', function() {
+      before(function(done) {
+        this.site = fs.readJsonSync(path.join(__dirname, 'common', 'config.json'));
+        this.prompts = {
+          path: 'page',
+          markups: 'html',
+          styles: 'css',
+        };
+        helpers.run(path.join(__dirname, '../generators/page'))
+          .inTmpDir(function (dir) {
+            fs.copySync(path.join(__dirname, 'common'), dir);
+          })
+          .withPrompts(this.prompts)
+          .on('end', done);
+      });
+
+      it('creates page files', function() {
+        assert.file([
+          path.join(this.site.paths.src, this.prompts.path, 'index.html'),
+          path.join(this.site.paths.src, this.prompts.path, 'styles.css'),
+        ]);
+      });
+    });
+  });
 });
