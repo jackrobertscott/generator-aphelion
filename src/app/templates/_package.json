@@ -6,7 +6,8 @@
     "gulp-autoprefixer": "^3.1.0",<% if (less) { %>
     "gulp-less": "^3.0.5",<% } %><% if (sass) { %>
     "gulp-sass": "^2.1.0",<% } %><% if (es6) { %>
-    "gulp-babel": "^6.1.0",<% } %><% if (coffee) { %>
+    "gulp-babel": "^6.1.0",
+    "babel-preset-es2015": "^6.1.18",<% } %><% if (coffee) { %>
     "gulp-coffee": "^2.3.1",<% } %><% if (jade || nunjucks) { %>
     "gulp-data": "^1.2.0",<% } %><% if (jade) { %>
     "gulp-jade": "^1.1.0",<% } %><% if (nunjucks) { %>

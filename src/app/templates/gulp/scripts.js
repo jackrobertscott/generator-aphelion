@@ -47,7 +47,9 @@ gulp.task('es6', function() {
   return gulp.src(help.filter(config.paths.src, '.es6'))
     .pipe(plumber(help.plumb))
     .pipe(gulpif(config.sourcemaps, sourcemaps.init()))
-    .pipe(babel())
+    .pipe(babel({
+      presets: ['es2015'],
+    }))
     .pipe(gulpif(config.sourcemaps, sourcemaps.write()))
     .pipe(gulp.dest(config.paths.tmp));
 });<% } %>
