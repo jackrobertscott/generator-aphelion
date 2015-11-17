@@ -1,5 +1,5 @@
 # Aphelion Website
-> Built by Aphelion Generator: Generator for capable static websites
+> Built by [The Aphelion Generator](https://npmjs.org/package/generator-aphelion)
 
 ## Usage
 - `gulp compile` compile website into temporary folder.
