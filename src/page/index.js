@@ -53,7 +53,7 @@ module.exports = class Generator extends Base {
       name: 'path',
       message: 'Path to location of page files',
       default: 'example',
-      when: !this.data.path,
+      when: !this.data.path && this.data.path !== '',
     }, {
       type: 'list',
       name: 'markups',
