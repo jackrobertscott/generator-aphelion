@@ -7,17 +7,22 @@ module.exports = class Generator extends Base {
   constructor() {
     super(...arguments);
 
-    this.option('skip-welcome-message', {
+    this.option('no-message', {
       desc: 'Skips the welcome message',
       type: Boolean,
     });
 
-    this.option('skip-install', {
+    this.option('no-install', {
       desc: 'Skips the installation of dependencies',
       type: Boolean,
     });
 
-    this.option('skip-install-message', {
+    this.option('no-install-message', {
+      desc: 'Skips the message after the installation of dependencies',
+      type: Boolean,
+    });
+
+    this.option('no-page', {
       desc: 'Skips the message after the installation of dependencies',
       type: Boolean,
     });
@@ -33,7 +38,7 @@ module.exports = class Generator extends Base {
   prompting() {
     let done = this.async();
 
-    if (!this.options['skip-welcome-message']) {
+    if (!this.options['no-message']) {
       this.log(yosay('Allo! Allo! This is the aphelion website generator.'));
     }
 
@@ -84,21 +89,24 @@ module.exports = class Generator extends Base {
     this._templateFile('_package.json', 'package.json', this.data);
     this._templateFile('gulpfile.js', 'gulpfile.js', this.data);
     this._templateDirectory('gulp', 'gulp', this.data);
-    this.composeWith('aphelion:page', {
-      options: {
-        'skip-welcome-message': true,
-        markups: (this.data.jade) ? 'jade' : (this.data.nunjucks) ? 'nunjucks' : 'html',
-        styles: (this.data.less) ? 'less' : (this.data.sass) ? 'scss' : 'css',
-      }
-    }, {
-      local: require.resolve('../page'),
-    });
+
+    if (!this.options['no-page']) {
+      this.composeWith('aphelion:page', {
+        options: {
+          'no-message': true,
+          markups: (this.data.jade) ? 'jade' : (this.data.nunjucks) ? 'nunjucks' : 'html',
+          styles: (this.data.less) ? 'less' : (this.data.sass) ? 'scss' : 'css',
+        }
+      }, {
+        local: require.resolve('../page'),
+      });
+    }
   }
 
   install() {
-    if (!this.options['skip-install']) {
+    if (!this.options['no-install']) {
       this.installDependencies({
-        skipMessage: this.options['skip-install-message'],
+        skipMessage: this.options['no-install-message'],
       });
     }
   }

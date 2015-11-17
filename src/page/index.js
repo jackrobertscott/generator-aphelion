@@ -7,7 +7,7 @@ module.exports = class Generator extends Base {
   constructor() {
     super(...arguments);
 
-    this.option('skip-welcome-message', {
+    this.option('no-message', {
       desc: 'Skips the welcome message',
       type: Boolean,
     });
@@ -19,7 +19,7 @@ module.exports = class Generator extends Base {
 
     this.option('styles', {
       desc: 'Which style compiler to use in page',
-      type: Boolean
+      type: String
     });
   }
 
@@ -29,14 +29,16 @@ module.exports = class Generator extends Base {
       markups: this.options.markups,
       styles: this.options.styles,
       yorc: this.config.getAll(),
-      site: this.fs.readJSON(this.destinationPath('config.json')),
     };
+    if (this.fs.exists(this.destinationPath('config.json'))) {
+      this.data = this.fs.readJSON(this.destinationPath('config.json'));
+    }
   }
 
   prompting() {
     let done = this.async();
 
-    if (!this.options['skip-welcome-message']) {
+    if (!this.options['no-message']) {
       this.log(yosay('Let\'s make a new page.'));
     }
 
