@@ -59,14 +59,14 @@ module.exports = class Generator extends Base {
       name: 'markups',
       message: 'Page markup type:',
       choices: [{
-        name: 'html',
-        value: 'HTML',
+        value: 'html',
+        name: 'HTML',
       }, {
-        name: 'jade',
-        value: 'Jade',
+        value: 'jade',
+        name: 'Jade',
       }, {
-        name: 'nunjucks',
-        value: 'Nunjucks',
+        value: 'nunjucks',
+        name: 'Nunjucks',
       }],
       when: !this.data.markups || ['html', 'jade', 'nunjucks'].indexOf(this.data.markups) === -1,
     }, {
@@ -74,17 +74,17 @@ module.exports = class Generator extends Base {
       name: 'styles',
       message: 'Page style type:',
       choices: [{
-        name: 'css',
-        value: 'CSS',
+        value: 'css',
+        name: 'CSS',
       }, {
-        name: 'sass',
-        value: 'SASS',
+        value: 'sass',
+        name: 'SASS',
       }, {
-        name: 'scss',
-        value: 'SCSS',
+        value: 'scss',
+        name: 'SCSS',
       }, {
-        name: 'less',
-        value: 'Less',
+        value: 'less',
+        name: 'Less',
       }],
       when: !this.data.styles || ['css', 'sass', 'scss', 'less'].indexOf(this.data.styles) === -1,
     }];
