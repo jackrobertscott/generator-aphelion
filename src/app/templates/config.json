@@ -4,5 +4,6 @@
     "tmp": "./.tmp",
     "dist": "./dist"
   },
+  "cname": "",
   "sourcemaps": false
 }
