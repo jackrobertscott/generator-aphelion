@@ -12,6 +12,11 @@ module.exports = class Generator extends Base {
       type: Boolean,
     });
 
+    this.option('path', {
+      desc: 'Path to location of page files',
+      type: String
+    });
+
     this.option('markups', {
       desc: 'Which markup compiler to use in page',
       type: String
@@ -25,7 +30,7 @@ module.exports = class Generator extends Base {
 
   initializing() {
     this.data = {
-      name: '',
+      path: this.options.path,
       markups: this.options.markups,
       styles: this.options.styles,
       yorc: this.config.getAll(),
@@ -41,6 +46,12 @@ module.exports = class Generator extends Base {
     }
 
     const prompts = [{
+      type: 'input',
+      name: 'path',
+      message: 'Path to location of page files',
+      default: 'example',
+      when: !this.data.path,
+    }, {
       type: 'checkbox',
       name: 'markups',
       message: 'Page markup type:',
@@ -83,7 +94,7 @@ module.exports = class Generator extends Base {
   }
 
   writing() {
-    let out = path.join(this.data.site.src || 'src', this.data.name);
+    let out = path.join(this.data.site.src || 'src', this.data.path);
     switch (this.data.markups) {
       case 'jade':
         this._copyDirectory('jade', out);
