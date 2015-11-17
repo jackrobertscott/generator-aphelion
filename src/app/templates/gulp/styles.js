@@ -8,6 +8,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var gulpif = require('gulp-if');<% } %><% if (less) { %>
 var less = require('gulp-less');<% } %><% if (sass) { %>
 var sass = require('gulp-sass');<% } %>
+var sequence = require('run-sequence');
 var config = require('../config');
 var help = require('./help');
 
@@ -18,9 +19,15 @@ gulp.task('styles', [
 ]);
 
 gulp.task('watch:styles', function() {
-  gulp.watch(path.join(config.paths.src, '**/*.css'), ['css', 'reload']);<% if (less) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.less'), ['less', 'reload']);<% } %><% if (sass) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.{sass,scss}'), ['sass', 'reload']);<% } %>
+  gulp.watch(path.join(config.paths.src, '**/*.css'), function(cb) {
+    sequence('css', 'reload', cb);
+  });<% if (less) { %>
+  gulp.watch(path.join(config.paths.src, '**/*.less'), function(cb) {
+    sequence('less', 'reload', cb);
+  });<% } %><% if (sass) { %>
+  gulp.watch(path.join(config.paths.src, '**/*.{sass,scss}'), function(cb) {
+    sequence('sass', 'reload', cb);
+  });<% } %>
 });
 
 gulp.task('css', function() {

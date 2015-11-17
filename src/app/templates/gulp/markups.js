@@ -6,6 +6,7 @@ var plumber = require('gulp-plumber');
 var data = require('gulp-data');<% } %><% if (jade) { %>
 var jade = require('gulp-jade');<% } %><% if (nunjucks) { %>
 var nunjucks = require('gulp-nunjucks-render');<% } %>
+var sequence = require('run-sequence');
 var config = require('../config');
 var help = require('./help');
 
@@ -16,9 +17,15 @@ gulp.task('markups', [
 ]);
 
 gulp.task('watch:markups', function() {
-  gulp.watch(path.join(config.paths.src, '**/*.html'), ['html', 'reload']);<% if (jade) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.jade'), ['jade', 'reload']);<% } %><% if (nunjucks) { %>
-  gulp.watch(path.join(config.paths.src, '**/*.nunjucks'), ['nunjucks', 'reload']);<% } %>
+  gulp.watch(path.join(config.paths.src, '**/*.html'), function(cb) {
+    sequence('html', 'inject:compile', 'reload', cb);
+  });<% if (jade) { %>
+  gulp.watch(path.join(config.paths.src, '**/*.jade'), function(cb) {
+    sequence('jade', 'inject:compile', 'reload', cb);
+  });<% } %><% if (nunjucks) { %>
+  gulp.watch(path.join(config.paths.src, '**/*.nunjucks'), function(cb) {
+    sequence('nunjucks', 'inject:compile', 'reload', cb);
+  });<% } %>
 });
 
 gulp.task('html', function() {
