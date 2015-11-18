@@ -42,10 +42,8 @@ module.exports = class Generator extends Base {
   }
 
   prompting() {
-    let done = this.async();
-
     if (!this.options['skip-message']) {
-      this.log(yosay('Let\'s make a new page.'));
+      this.log(yosay('Let\'s make a new page!'));
     }
 
     let markups = [{
@@ -99,16 +97,21 @@ module.exports = class Generator extends Base {
       when: (!this.data.styles ||
         ['css', 'sass', 'scss', 'less'].indexOf(this.data.styles) === -1) &&
         styles.length > 1,
-    }];
-
-    this.prompt(prompts, (answers) => {
-      _.assign(this.data, answers);
-
-      if (!this.data.markups) this.data.markups = markups[0].value;
-      if (!this.data.styles) this.data.styles = styles[0].value;
-
-      done();
+    }].filter((prompt) => {
+      return prompt.when;
     });
+
+    if (prompts.length) {
+      let done = this.async();
+      this.prompt(prompts, (answers) => {
+        _.assign(this.data, answers);
+
+        if (!this.data.markups) this.data.markups = markups[0].value;
+        if (!this.data.styles) this.data.styles = styles[0].value;
+
+        done();
+      });
+    }
   }
 
   writing() {

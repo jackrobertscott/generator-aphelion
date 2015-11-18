@@ -29,7 +29,7 @@ module.exports = class Generator extends Base {
     let done = this.async();
 
     if (!this.options['skip-message']) {
-      this.log(yosay('Allo! Allo! This is the aphelion website generator.'));
+      this.log(yosay('Allo! Let\'s Make A Website!'));
     }
 
     const prompts = _.uniq(options, (option) => {
@@ -75,26 +75,32 @@ module.exports = class Generator extends Base {
     this.config.set(this.data);
   }
 
-  writing() {
-    this._copyFile('_.gitignore', '.gitignore');
-    this._copyFile('_bower.json', 'bower.json');
-    this._templateFile('_package.json', 'package.json', this.data);
-    this._copyFile('config.json');
-    this._templateFile('gulpfile.js', this.data);
-    this._templateDirectory('gulp', this.data);
+  get writing() {
+    return {
+      app() {
+        this._copyFile('_.gitignore', '.gitignore');
+        this._copyFile('_bower.json', 'bower.json');
+        this._templateFile('_package.json', 'package.json', this.data);
+        this._copyFile('config.json');
+        this._templateFile('gulpfile.js', this.data);
+        this._templateDirectory('gulp', this.data);
+      },
 
-    if (!this.options['skip-page']) {
-      this.composeWith('aphelion:page', {
-        options: {
-          'skip-message': true,
-          path: '',
-          markups: (this.data.jade) ? 'jade' : (this.data.nunjucks) ? 'nunjucks' : 'html',
-          styles: (this.data.sass) ? 'scss' : (this.data.less) ? 'less' : 'css',
+      page() {
+        if (!this.options['skip-page']) {
+          this.composeWith('aphelion:page', {
+            options: {
+              'skip-message': true,
+              path: '',
+              markups: (this.data.jade) ? 'jade' : (this.data.nunjucks) ? 'nunjucks' : 'html',
+              styles: (this.data.sass) ? 'scss' : (this.data.less) ? 'less' : 'css',
+            }
+          }, {
+            local: require.resolve('../page'),
+          });
         }
-      }, {
-        local: require.resolve('../page'),
-      });
-    }
+      }
+    };
   }
 
   install() {
