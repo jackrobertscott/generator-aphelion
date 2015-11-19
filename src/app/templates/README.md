@@ -9,6 +9,16 @@
 - `gulp deploy` deploy a compiled, compressed version of website to GitHub Pages.
 - `gulp deploy:uncompressed` deploy a compiled, uncompressed version of website to GitHub Pages.
 
+## Configuration
+Main configuration is kept in a file called config.json. This file should contain the following properties:
+- `paths`
+  - `src` Type `string` Required: Specifies the source directory of the website code.
+  - `tmp` Type `string` Required: The temporary directory for serving the compiled website.
+  - `dist` Type `string` Required: Distribution directory for compiled and compressed code.
+
+- `sourcemaps` Type `boolean|regex|function` Required: Add sourcemaps. (see: [gulp-if](https://www.npmjs.com/package/gulp-if))
+- `cname` Type `string` Optional: Add `CNAME` file when deploying with this url.
+
 ## File Injection
 Script and style files, both custom built and installed from bower, may be injected into markup files. To do this, you must include associated comment tags into any markup file you wish to have the scripts/styles included in. Bellow is an example:
 
@@ -33,4 +43,24 @@ Script and style files, both custom built and installed from bower, may be injec
     <!-- endinject -->
   </body>
 </html>
+```
+
+## Partials
+Partial files may be inserted into `.jade` and `.nunjucks` files that render with given data.
+
+Jade:
+```jade
+body
+  != partial('_views/header.jade', {title: 'Page Title'})
+  p Some content
+  != partial('_views/footer.jade', {title: 'Page Title'})
+```
+
+Nunjucks:
+```nunjucks
+<body>
+  {{ partial('_views/header.jade', {title: 'Page Title'}) }}
+  <p>Some content</p>
+  {{ partial('_views/footer.jade', {title: 'Page Title'}) }}
+</body>
 ```
