@@ -37,9 +37,7 @@ gulp.task('jade', function() {
   return gulp.src(help.filter(config.paths.src, '.jade'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
-      try {
-        return help.requireUncached(path.join(path.dirname(file.path), path.basename(file.path, path.extname(file.path)) + '.json'));
-      } catch(e) {}
+      return help.locals(file);
     }))
     .pipe(jade({
       pretty: true,
@@ -51,7 +49,7 @@ gulp.task('nunjucks', function() {
   return gulp.src(help.filter(config.paths.src, '.nunjucks'))
     .pipe(plumber(help.plumb))
     .pipe(data(function(file) {
-      return help.requireUncached(path.join(path.dirname(file.path), path.basename(file.path, path.extname(file.path)) + '.json'));
+      return help.locals(file);
     }))
     .pipe(nunjucks())
     .pipe(gulp.dest(config.paths.tmp));
