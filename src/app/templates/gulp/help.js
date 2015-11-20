@@ -1,8 +1,8 @@
 'use strict';
 
-var path = require('path');
-var jade = require('jade');
-var nunjucks = require('nunjucks');
+var path = require('path');<% if (jade) { %>
+var jade = require('jade');<% } %><% if (nunjucks) { %>
+var nunjucks = require('nunjucks');<% } %>
 var _ = require('lodash');
 var gutil = require('gulp-util');
 var config = require('../config');
@@ -49,11 +49,11 @@ help._partial = function _partial(file, data) {
   var ext = path.extname(file);
   file = path.join(__dirname, '..', config.paths.src, file);
   data = _.assign(help._fileData(file), data || {});
-  switch (ext) {
+  switch (ext) {<% if (jade) { %>
     case '.jade':
-      return jade.renderFile(file, data);
+      return jade.renderFile(file, data);<% } %><% if (nunjucks) { %>
     case '.nunjucks':
-      return nunjucks.render(file, data);
+      return nunjucks.render(file, data);<% } %>
     default:
       throw new Error('partial with extension ' + ext + ' is not supported');
   }
