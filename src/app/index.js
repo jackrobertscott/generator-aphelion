@@ -1,11 +1,13 @@
 const yosay = require('yosay');
 const _ = require('lodash');
 const Base = require('../base');
-const options = require('./options');
+const prompts = require('./prompts');
 
 module.exports = class Generator extends Base {
   constructor() {
     super(...arguments);
+
+    this.data = {};
 
     this.option('skip-message', {
       desc: 'Skips the welcome message',
@@ -17,11 +19,19 @@ module.exports = class Generator extends Base {
       type: Boolean,
     });
 
-    options.forEach((option) => {
-      this.option(option.name, {
-        desc: 'Install ' + option.pretty,
-        type: Boolean,
+    prompts.forEach(prompt => {
+      if (prompt.type !== 'checkbox') return;
+      prompt.choices.forEach(choice => {
+        this.option(choice.value, {
+          desc: 'Use ' + choice.name,
+          type: Boolean,
+        });
       });
+    });
+
+    this.option('framework', {
+      desc: 'Use which custom front end framework',
+      type: String,
     });
   }
 
@@ -32,39 +42,31 @@ module.exports = class Generator extends Base {
       this.log(yosay('Allo! Let\'s Make A Website!'));
     }
 
-    const prompts = _.uniq(options, (option) => {
-        return option.type;
-      })
-      .map(({
-        type
-      }) => {
-        let choices = options.filter((option) => {
-            return option.type === type && !this.options[option.name];
-          })
-          .map((option) => {
-            return {
-              name: option.pretty,
-              value: option.name,
-            };
-          });
-
-        return {
-          type: 'checkbox',
-          name: type,
-          message: 'Include extra ' + type + ' compilers:',
-          choices: choices,
-          when: !!choices.length,
-        };
-      });
+    prompts.forEach(prompt => {
+      if (prompt.type !== 'checkbox') {
+        prompt.choices.filter(choice => {
+          return !this.options[choice.value];
+        });
+        prompt.when = !!prompts.choices.length;
+      } else if (prompt.name === 'framework') {
+        if (this.options.framework && ['bs3', 'bs4', 'skeleton', 'jquery', 'none'].indexOf(this.options.framework) !== -1) {
+          prompt.when = false; // don't ask for if set as option
+        } else {
+          delete this.options.framework; // delete just incase wrong var set
+        }
+      }
+    });
 
     this.prompt(prompts, (answers) => {
-      this.data = {};
-
-      options.forEach((option) => {
-        this.data[option.name] = (answers[option.type] &&
-            answers[option.type].indexOf(option.name) !== -1) ||
-          !!this.options[option.name] || false; // shouldn't reach false
+      prompts.forEach(prompt => {
+        if (prompt.type !== 'checkbox') return;
+        prompt.choices.forEach(choice => {
+          this.data[choice.value] = !!this.options[choice.value] ||
+            (answers[prompt.name] && answers[prompt.name].indexOf(choice.value) !== -1);
+        });
       });
+
+      this.data.framework = this.options.framework || answers.framework;
 
       done();
     });
@@ -79,7 +81,7 @@ module.exports = class Generator extends Base {
     return {
       app() {
         this._copyFile('_.gitignore', '.gitignore');
-        this._copyFile('_bower.json', 'bower.json');
+        this._templateFile('_bower.json', 'bower.json', this.data);
         this._templateFile('_package.json', 'package.json', this.data);
         this._copyFile('config.json');
         this._templateFile('gulpfile.js', this.data);
