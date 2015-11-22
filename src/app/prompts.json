@@ -1,0 +1,51 @@
+[{
+  "type": "checkbox",
+  "name": "markups",
+  "message": "Install markup compilers (along with HTML):",
+  "choices": [{
+    "name": "Jade",
+    "value": "jade"
+  }, {
+    "name": "Nunjucks",
+    "value": "nunjucks"
+  }]
+}, {
+  "type": "checkbox",
+  "name": "styles",
+  "message": "Install style compilers (along with CSS):",
+  "choices": [{
+    "name": "LESS",
+    "value": "less"
+  }, {
+    "name": "Sass/SCSS",
+    "value": "sass"
+  }]
+}, {
+  "type": "checkbox",
+  "name": "scripts",
+  "message": "Install script compilers (along with ES5 JavaScript):",
+  "choices": [{
+    "name": "CoffeeScript",
+    "value": "coffee"
+  }, {
+    "name": "ES6 JavaScript",
+    "value": "es6"
+  }]
+}, {
+  "type": "list",
+  "name": "framework",
+  "message": "Select a front end framework to install",
+  "choices": [{
+    "name": "Bootstrap 3",
+    "value": "bs3"
+  }, {
+    "name": "Bootstrap 4",
+    "value": "bs4"
+  }, {
+    "name": "Skeleton",
+    "value": "skeleton"
+  }, {
+    "name": "None",
+    "value": "none"
+  }]
+}]

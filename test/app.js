@@ -15,6 +15,7 @@ describe('aphelion:app', function() {
           less: true,
           coffee: true,
           es6: true,
+          framework: 'none',
         };
         helpers.run(path.join(__dirname, '../generators/app'))
           .withOptions(this.options)
@@ -70,6 +71,7 @@ describe('aphelion:app', function() {
           markups: ['jade', 'nunjucks'],
           styles: ['sass', 'less'],
           scripts: ['coffee', 'es6'],
+          framework: 'none',
         };
         helpers.run(path.join(__dirname, '../generators/app'))
           .withPrompts(this.prompts)
@@ -130,6 +132,7 @@ describe('aphelion:app', function() {
           less: false,
           coffee: false,
           es6: false,
+          framework: 'none',
         };
         helpers.run(path.join(__dirname, '../generators/app'))
           .withOptions(this.options)
@@ -185,6 +188,7 @@ describe('aphelion:app', function() {
           markups: [],
           styles: [],
           scripts: [],
+          framework: 'none',
         };
         helpers.run(path.join(__dirname, '../generators/app'))
           .withPrompts(this.prompts)
@@ -231,6 +235,86 @@ describe('aphelion:app', function() {
           ['package.json', 'gulp-less'],
           ['package.json', 'gulp-sass'],
         ]);
+      });
+    });
+  });
+
+  describe('front end frameworks', function() {
+    describe('passing options', function() {
+      before(function(done) {
+        this.options = {
+          jade: false,
+          nunjucks: false,
+          sass: false,
+          less: false,
+          coffee: false,
+          es6: false,
+          framework: 'bs3',
+        };
+        helpers.run(path.join(__dirname, '../generators/app'))
+          .withOptions(this.options)
+          .on('end', done);
+      });
+
+      it('should contain bootstrap framework', function() {
+        assert.fileContent('bower.json', '"bootstrap": "~3.3.5",');
+      });
+    });
+
+    describe('passing option framework:"none"', function() {
+      before(function(done) {
+        this.options = {
+          jade: false,
+          nunjucks: false,
+          sass: false,
+          less: false,
+          coffee: false,
+          es6: false,
+          framework: 'none',
+        };
+        helpers.run(path.join(__dirname, '../generators/app'))
+          .withOptions(this.options)
+          .on('end', done);
+      });
+
+      it('should not contain bootstrap framework', function() {
+        assert.noFileContent('bower.json', '"bootstrap": "~3.3.5",');
+      });
+    });
+
+    describe('passing prompts', function() {
+      before(function(done) {
+        this.prompts = {
+          markups: [],
+          styles: [],
+          scripts: [],
+          framework: 'bs3',
+        };
+        helpers.run(path.join(__dirname, '../generators/app'))
+          .withPrompts(this.prompts)
+          .on('end', done);
+      });
+
+      it('should contain bootstrap framework', function() {
+        assert.fileContent('bower.json', '"bootstrap": "~3.3.5",');
+      });
+    });
+
+    describe('passing prompt framework:"none"', function() {
+      before(function(done) {
+        this.prompts = {
+          markups: [],
+          styles: [],
+          scripts: [],
+          framework: 'none',
+        };
+        helpers.run(path.join(__dirname, '../generators/app'))
+          .withPrompts(this.prompts)
+          .on('end', done);
+      });
+
+      it('should not contain bootstrap framework', function() {
+        assert.noFileContent('bower.json', '"bootstrap": "~3.3.5",');
       });
     });
   });
