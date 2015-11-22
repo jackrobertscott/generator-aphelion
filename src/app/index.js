@@ -30,7 +30,7 @@ module.exports = class Generator extends Base {
     });
 
     this.option('framework', {
-      desc: 'Use which custom front end framework',
+      desc: 'Use which front end framework',
       type: String,
     });
   }
@@ -42,22 +42,24 @@ module.exports = class Generator extends Base {
       this.log(yosay('Allo! Let\'s Make A Website!'));
     }
 
-    prompts.forEach(prompt => {
-      if (prompt.type !== 'checkbox') {
-        prompt.choices.filter(choice => {
+    const questions = prompts.map(prompt => {
+      const question = _.assign({}, prompt); // copy
+      if (question.type === 'checkbox') {
+        question.choices = question.choices.filter(choice => {
           return !this.options[choice.value];
         });
-        prompt.when = !!prompts.choices.length;
-      } else if (prompt.name === 'framework') {
-        if (this.options.framework && ['bs3', 'bs4', 'skeleton', 'jquery', 'none'].indexOf(this.options.framework) !== -1) {
-          prompt.when = false; // don't ask for if set as option
+        question.when = !!question.choices.length;
+      } else if (question.name === 'framework') {
+        if (this.options.framework && ['bs3', 'bs4', 'skeleton', 'none'].indexOf(this.options.framework) !== -1) {
+          question.when = false; // don't ask for if set as option
         } else {
           delete this.options.framework; // delete just incase wrong var set
         }
       }
+      return question;
     });
 
-    this.prompt(prompts, (answers) => {
+    this.prompt(questions, (answers) => {
       prompts.forEach(prompt => {
         if (prompt.type !== 'checkbox') return;
         prompt.choices.forEach(choice => {

@@ -7,10 +7,10 @@
     "test",
     "tests"
   ],
-  "dependencies": {<% if (framework === 'jquery') { %>
-    "jquery": "~2.1.4",<% } %><% if (framework === 'bs3') { %>
+  "dependencies": {<% if (framework === 'bs3') { %>
     "bootstrap": "~3.3.5",<% } %><% if (framework === 'bs4') { %>
     "bootstrap": "4.0",<% } %><% if (framework === 'skeleton') { %>
-    "skeleton": "~2.0.4"<% } %>
+    "skeleton": "~2.0.4",<% } %>
+    "jquery": "~2.1.4"
   }
 }
