@@ -1,3 +1,5 @@
+'use strict';
+
 const yosay = require('yosay');
 const _ = require('lodash');
 const Base = require('../base');
