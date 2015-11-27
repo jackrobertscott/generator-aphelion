@@ -15,7 +15,7 @@ function Helpers() {
 Helpers.prototype.filter = function filter(dir, ext) {
   return [
     path.join(dir, '**/*' + ext || ''),
-    '!' + path.join(dir, '**/_**'),
+    '!' + path.join(dir, '**/_*{/**,}'),
   ];
 };
 
