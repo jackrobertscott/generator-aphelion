@@ -21,7 +21,7 @@ $ npm install -g yo gulp generator-aphelion
 
 - Scripts
   - JavaScript ES5
-  - [JavaScript ES6](https://github.com/lukehoban/es6features)
+  - [TypeScript](http://www.typescriptlang.org/) (superset of ES6)
   - [CoffeeScript](http://coffeescript.org/)
 
 ## Generators
