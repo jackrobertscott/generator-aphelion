@@ -28,8 +28,8 @@
     "name": "CoffeeScript",
     "value": "coffee"
   }, {
-    "name": "ES6 JavaScript",
-    "value": "es6"
+    "name": "TypeScript (superset of ES6)",
+    "value": "ts"
   }]
 }, {
   "type": "list",

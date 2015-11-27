@@ -89,6 +89,7 @@ module.exports = class Generator extends Base {
         this._templateFile('_package.json', 'package.json', this.data);
         this._copyFile('config.json');
         this._templateFile('gulpfile.js', this.data);
+        this._templateFile('README.md', this.data);
         this._templateDirectory('gulp', this.data);
       },
 

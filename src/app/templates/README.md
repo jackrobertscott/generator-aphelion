@@ -66,7 +66,7 @@ Nunjucks:
   <p>Some content</p>
   {{ partial('_views/footer.jade', {title: 'Page Title'}) }}
 </body>
-```<% } %><% } %>
+```<% } %><% } %><% if (jade || nunjucks) { %>
 
 ## Markdown Posts
 Posts may be written in markdown and extended from other templating engines. This is done like so:<% if (jade) { %>
