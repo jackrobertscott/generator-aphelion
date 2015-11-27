@@ -1,37 +1,47 @@
 {
   "private": true,
-  "devDependencies": {
-    "browser-sync": "^2.10.0",
-    "gulp": "^3.9.0",
-    "lodash": "^3.10.1",
-    "gulp-autoprefixer": "^3.1.0",<% if (less) { %>
-    "gulp-less": "^3.0.5",<% } %><% if (sass) { %>
-    "gulp-sass": "^2.1.0",<% } %><% if (es6) { %>
-    "gulp-babel": "^6.1.0",
-    "babel-preset-es2015": "^6.1.18",<% } %><% if (coffee) { %>
-    "gulp-coffee": "^2.3.1",<% } %><% if (jade || nunjucks) { %>
-    "gulp-data": "^1.2.0",<% } %><% if (jade) { %>
+  "scripts": {
+    "gulp": "gulp",
+    "compile": "npm run gulp compile",
+    "serve": "npm run gulp serve",
+    "serve:nowatch": "npm run gulp serve:nowatch",
+    "serve:build": "npm run gulp serve:build",
+    "build": "npm run gulp build",
+    "deploy": "npm run gulp deploy",
+    "deploy:nobuild": "npm run gulp deploy:nobuild"
+  },
+  "devDependencies": {<% if (jade || nunjucks) { %>
+    "gulp-data": "^1.2.1",
+    "gulp-front-matter": "^1.3.0",
+    "gulp-markdown": "^1.2.0",
+    "gulp-layout": "0.0.3",
+    "marked": "^0.3.5",<% } %><% if (jade) { %>
     "gulp-jade": "^1.1.0",
     "jade": "^1.11.0",<% } %><% if (nunjucks) { %>
     "gulp-nunjucks-render": "^1.0.0",
-    "nunjucks": "^2.1.0",<% } %>
-    "gulp-util": "^3.0.7",
-    "gulp-if": "^2.0.0",
-    "gulp-filter": "^3.0.1",
-    "gulp-inject": "^3.0.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-imagemin": "^2.4.0",
-    "gulp-plumber": "^1.0.1",
-    "gulp-gh-pages": "^0.5.4",
-    "gulp-file": "^0.2.0",
+    "nunjucks": "^2.2.0",<% } %><% if (ts) { %>
+    "gulp-typescript": "^2.9.2",<% } %><% if (coffee) { %>
+    "gulp-coffee": "^2.3.1",<% } %><% if (less) { %>
+    "gulp-less": "^3.0.5",<% } %><% if (sass) { %>
+    "gulp-sass": "^2.1.0",<% } %>
+    "browser-sync": "^2.10.0",
+    "del": "^2.1.0",
+    "gulp": "gulpjs/gulp#4.0",
+    "gulp-autoprefixer": "^3.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-csso": "^1.0.1",
+    "gulp-file": "^0.2.0",
+    "gulp-filter": "^3.0.1",
+    "gulp-gh-pages": "^0.5.4",
+    "gulp-if": "^2.0.0",
+    "gulp-imagemin": "^2.4.0",
+    "gulp-inject": "^3.0.0",
     "gulp-minify-html": "^1.0.4",
-    "gulp-uglify": "^1.5.1",
     "gulp-rev": "^6.0.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglify": "^1.5.1",
+    "lodash": "^3.10.1",
     "main-bower-files": "^2.9.0",
-    "require-dir": "^0.3.0",
-    "run-sequence": "^1.1.4",
-    "del": "^2.1.0"
+    "require-dir": "^0.3.0"
   }
 }
