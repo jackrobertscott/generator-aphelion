@@ -4,6 +4,7 @@
     "tmp": "./.tmp",
     "dist": "./dist"
   },
+  "sourcemaps": false,
   "cname": "",
-  "sourcemaps": false
+  "bower": {}
 }

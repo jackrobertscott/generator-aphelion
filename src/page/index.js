@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const yosay = require('yosay');
 const _ = require('lodash');

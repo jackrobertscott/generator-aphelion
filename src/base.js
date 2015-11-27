@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const Base = require('yeoman-generator').Base;
 const glob = require('glob');

@@ -14,7 +14,7 @@ describe('aphelion:app', function() {
           sass: true,
           less: true,
           coffee: true,
-          es6: true,
+          ts: true,
           framework: 'none',
         };
         helpers.run(path.join(__dirname, '../generators/app'))
@@ -29,27 +29,25 @@ describe('aphelion:app', function() {
           'package.json',
           'config.json',
           'gulpfile.js',
-          'gulp/build.js',
+          'README.md',
+          'gulp/clean.js',
           'gulp/compile.js',
-          'gulp/deploy.js',
-          'gulp/help.js',
-          'gulp/images.js',
-          'gulp/markups.js',
-          'gulp/other.js',
-          'gulp/scripts.js',
-          'gulp/serve.js',
-          'gulp/styles.js',
+          'gulp/compress.js',
+          'gulp/helpers.js',
+          'gulp/inject.js',
+          'gulp/upload.js',
+          'gulp/watch.js',
         ]);
       });
 
       it('contains correct gulp tasks', function() {
         assert.fileContent([
-          ['gulp/markups.js', 'gulp.task(\'jade\''],
-          ['gulp/markups.js', 'gulp.task(\'nunjucks\''],
-          ['gulp/scripts.js', 'gulp.task(\'coffee\''],
-          ['gulp/scripts.js', 'gulp.task(\'es6\''],
-          ['gulp/styles.js', 'gulp.task(\'less\''],
-          ['gulp/styles.js', 'gulp.task(\'sass\''],
+          ['gulp/compile.js', 'gulp.task(\'jade\''],
+          ['gulp/compile.js', 'gulp.task(\'nunjucks\''],
+          ['gulp/compile.js', 'gulp.task(\'coffee\''],
+          ['gulp/compile.js', 'gulp.task(\'ts\''],
+          ['gulp/compile.js', 'gulp.task(\'less\''],
+          ['gulp/compile.js', 'gulp.task(\'sass\''],
         ]);
       });
 
@@ -58,7 +56,7 @@ describe('aphelion:app', function() {
           ['package.json', 'gulp-jade'],
           ['package.json', 'gulp-nunjucks-render'],
           ['package.json', 'gulp-coffee'],
-          ['package.json', 'gulp-babel'],
+          ['package.json', 'gulp-typescript'],
           ['package.json', 'gulp-less'],
           ['package.json', 'gulp-sass'],
         ]);
@@ -70,7 +68,7 @@ describe('aphelion:app', function() {
         this.prompts = {
           markups: ['jade', 'nunjucks'],
           styles: ['sass', 'less'],
-          scripts: ['coffee', 'es6'],
+          scripts: ['coffee', 'ts'],
           framework: 'none',
         };
         helpers.run(path.join(__dirname, '../generators/app'))
@@ -85,27 +83,25 @@ describe('aphelion:app', function() {
           'package.json',
           'config.json',
           'gulpfile.js',
-          'gulp/build.js',
+          'README.md',
+          'gulp/clean.js',
           'gulp/compile.js',
-          'gulp/deploy.js',
-          'gulp/help.js',
-          'gulp/images.js',
-          'gulp/markups.js',
-          'gulp/other.js',
-          'gulp/scripts.js',
-          'gulp/serve.js',
-          'gulp/styles.js',
+          'gulp/compress.js',
+          'gulp/helpers.js',
+          'gulp/inject.js',
+          'gulp/upload.js',
+          'gulp/watch.js',
         ]);
       });
 
       it('contains correct gulp tasks', function() {
         assert.fileContent([
-          ['gulp/markups.js', 'gulp.task(\'jade\''],
-          ['gulp/markups.js', 'gulp.task(\'nunjucks\''],
-          ['gulp/scripts.js', 'gulp.task(\'coffee\''],
-          ['gulp/scripts.js', 'gulp.task(\'es6\''],
-          ['gulp/styles.js', 'gulp.task(\'less\''],
-          ['gulp/styles.js', 'gulp.task(\'sass\''],
+          ['gulp/compile.js', 'gulp.task(\'jade\''],
+          ['gulp/compile.js', 'gulp.task(\'nunjucks\''],
+          ['gulp/compile.js', 'gulp.task(\'coffee\''],
+          ['gulp/compile.js', 'gulp.task(\'ts\''],
+          ['gulp/compile.js', 'gulp.task(\'less\''],
+          ['gulp/compile.js', 'gulp.task(\'sass\''],
         ]);
       });
 
@@ -114,7 +110,7 @@ describe('aphelion:app', function() {
           ['package.json', 'gulp-jade'],
           ['package.json', 'gulp-nunjucks-render'],
           ['package.json', 'gulp-coffee'],
-          ['package.json', 'gulp-babel'],
+          ['package.json', 'gulp-typescript'],
           ['package.json', 'gulp-less'],
           ['package.json', 'gulp-sass'],
         ]);
@@ -131,7 +127,7 @@ describe('aphelion:app', function() {
           sass: false,
           less: false,
           coffee: false,
-          es6: false,
+          ts: false,
           framework: 'none',
         };
         helpers.run(path.join(__dirname, '../generators/app'))
@@ -146,27 +142,25 @@ describe('aphelion:app', function() {
           'package.json',
           'config.json',
           'gulpfile.js',
-          'gulp/build.js',
+          'README.md',
+          'gulp/clean.js',
           'gulp/compile.js',
-          'gulp/deploy.js',
-          'gulp/help.js',
-          'gulp/images.js',
-          'gulp/markups.js',
-          'gulp/other.js',
-          'gulp/scripts.js',
-          'gulp/serve.js',
-          'gulp/styles.js',
+          'gulp/compress.js',
+          'gulp/helpers.js',
+          'gulp/inject.js',
+          'gulp/upload.js',
+          'gulp/watch.js',
         ]);
       });
 
       it('does not contain extra gulp tasks', function() {
         assert.noFileContent([
-          ['gulp/markups.js', 'gulp.task(\'jade\''],
-          ['gulp/markups.js', 'gulp.task(\'nunjucks\''],
-          ['gulp/scripts.js', 'gulp.task(\'coffee\''],
-          ['gulp/scripts.js', 'gulp.task(\'es6\''],
-          ['gulp/styles.js', 'gulp.task(\'less\''],
-          ['gulp/styles.js', 'gulp.task(\'sass\''],
+          ['gulp/compile.js', 'gulp.task(\'jade\''],
+          ['gulp/compile.js', 'gulp.task(\'nunjucks\''],
+          ['gulp/compile.js', 'gulp.task(\'coffee\''],
+          ['gulp/compile.js', 'gulp.task(\'ts\''],
+          ['gulp/compile.js', 'gulp.task(\'less\''],
+          ['gulp/compile.js', 'gulp.task(\'sass\''],
         ]);
       });
 
@@ -175,7 +169,7 @@ describe('aphelion:app', function() {
           ['package.json', 'gulp-jade'],
           ['package.json', 'gulp-nunjucks-render'],
           ['package.json', 'gulp-coffee'],
-          ['package.json', 'gulp-babel'],
+          ['package.json', 'gulp-typescript'],
           ['package.json', 'gulp-less'],
           ['package.json', 'gulp-sass'],
         ]);
@@ -202,27 +196,25 @@ describe('aphelion:app', function() {
           'package.json',
           'config.json',
           'gulpfile.js',
-          'gulp/build.js',
+          'README.md',
+          'gulp/clean.js',
           'gulp/compile.js',
-          'gulp/deploy.js',
-          'gulp/help.js',
-          'gulp/images.js',
-          'gulp/markups.js',
-          'gulp/other.js',
-          'gulp/scripts.js',
-          'gulp/serve.js',
-          'gulp/styles.js',
+          'gulp/compress.js',
+          'gulp/helpers.js',
+          'gulp/inject.js',
+          'gulp/upload.js',
+          'gulp/watch.js',
         ]);
       });
 
       it('does not contain extra gulp tasks', function() {
         assert.noFileContent([
-          ['gulp/markups.js', 'gulp.task(\'jade\''],
-          ['gulp/markups.js', 'gulp.task(\'nunjucks\''],
-          ['gulp/scripts.js', 'gulp.task(\'coffee\''],
-          ['gulp/scripts.js', 'gulp.task(\'es6\''],
-          ['gulp/styles.js', 'gulp.task(\'less\''],
-          ['gulp/styles.js', 'gulp.task(\'sass\''],
+          ['gulp/compile.js', 'gulp.task(\'jade\''],
+          ['gulp/compile.js', 'gulp.task(\'nunjucks\''],
+          ['gulp/compile.js', 'gulp.task(\'coffee\''],
+          ['gulp/compile.js', 'gulp.task(\'ts\''],
+          ['gulp/compile.js', 'gulp.task(\'less\''],
+          ['gulp/compile.js', 'gulp.task(\'sass\''],
         ]);
       });
 
@@ -231,7 +223,7 @@ describe('aphelion:app', function() {
           ['package.json', 'gulp-jade'],
           ['package.json', 'gulp-nunjucks-render'],
           ['package.json', 'gulp-coffee'],
-          ['package.json', 'gulp-babel'],
+          ['package.json', 'gulp-typescript'],
           ['package.json', 'gulp-less'],
           ['package.json', 'gulp-sass'],
         ]);
@@ -248,7 +240,7 @@ describe('aphelion:app', function() {
           sass: false,
           less: false,
           coffee: false,
-          es6: false,
+          ts: false,
           framework: 'bs3',
         };
         helpers.run(path.join(__dirname, '../generators/app'))
@@ -269,7 +261,7 @@ describe('aphelion:app', function() {
           sass: false,
           less: false,
           coffee: false,
-          es6: false,
+          ts: false,
           framework: 'none',
         };
         helpers.run(path.join(__dirname, '../generators/app'))
