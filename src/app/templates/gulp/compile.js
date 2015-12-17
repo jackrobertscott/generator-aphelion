@@ -5,8 +5,7 @@ var gulp = require('gulp');
 var gulpif = require('gulp-if');
 var sourcemaps = require('gulp-sourcemaps');
 var autoprefixer = require('gulp-autoprefixer');
-var imagemin = require('gulp-imagemin');
-var mainBowerFiles = require('main-bower-files');<% if (jade || nunjucks) { %>
+var imagemin = require('gulp-imagemin');<% if (jade || nunjucks) { %>
 var data = require('gulp-data');
 var frontMatter = require('gulp-front-matter');
 var markdown = require('gulp-markdown');
@@ -109,11 +108,6 @@ gulp.task('images', function() {
   return gulp.src(helpers.src(config.paths.src, ['.gif', '.jpeg', '.jpg', '.png', '.svg']))
     .pipe(imagemin())
     .pipe(gulp.dest(config.paths.tmp));
-});
-
-gulp.task('vendor', function() {
-  return gulp.src(mainBowerFiles(config.bower))
-    .pipe(gulp.dest(path.join(config.paths.tmp, 'vendor')));
 });
 
 gulp.task('other', function() {

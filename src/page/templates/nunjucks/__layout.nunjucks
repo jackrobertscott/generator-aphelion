@@ -2,9 +2,11 @@
 <html>
   <head>
     <title>{% block title %}Default Title{% endblock %}</title>
-    <!-- bower:css -->
-    <!-- bower installed css files will go here... -->
-    <!-- endinject -->
+
+    <!-- build:css vendor.min.css -->
+    <!-- manually insert vendor/bower file links here... -->
+    <!-- endbuild -->
+
     <!-- inject:css -->
     <!-- css files will go here... -->
     <!-- endinject -->
@@ -14,9 +16,10 @@
     <h1>Default Content!</h1>
     {% endblock %}
 
-    <!-- bower:js -->
-    <!-- bower installed scripts will go here... -->
-    <!-- endinject -->
+    <!-- build:js vendor.min.js -->
+    <!-- manually insert vendor/bower file links here... -->
+    <!-- endbuild -->
+
     <!-- inject:js -->
     <!-- js files will go here... -->
     <!-- endinject -->

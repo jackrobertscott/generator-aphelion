@@ -6,22 +6,10 @@ var inject = require('gulp-inject');
 var config = require('../config');
 
 gulp.task('inject:tmp', function() {
-  var js = gulp.src([
-    path.join(config.paths.tmp, '**/*.js'),
-    '!' + path.join(config.paths.tmp, 'vendor/*.js'),
-  ], {
+  var js = gulp.src(path.join(config.paths.tmp, '**/*.js'), {
     read: false,
   });
-  var css = gulp.src([
-    path.join(config.paths.tmp, '**/*.css'),
-    '!' + path.join(config.paths.tmp, 'vendor/*.css'),
-  ], {
-    read: false,
-  });
-  var vendor = gulp.src([
-    path.join(config.paths.tmp, 'vendor/*.js'),
-    path.join(config.paths.tmp, 'vendor/*.css'),
-  ], {
+  var css = gulp.src(path.join(config.paths.tmp, '**/*.css'), {
     read: false,
   });
 
@@ -32,32 +20,14 @@ gulp.task('inject:tmp', function() {
     .pipe(inject(css, {
       relative: true,
     }))
-    .pipe(inject(vendor, {
-      name: 'bower',
-      relative: true,
-    }))
     .pipe(gulp.dest(config.paths.tmp));
 });
 
-// TODO use gulp-useref so that otherfiles may be inserted
-
 gulp.task('inject:build', function() {
-  var js = gulp.src([
-    path.join(config.paths.dist, '**/*.js'),
-    '!' + path.join(config.paths.dist, 'vendor/*.js'),
-  ], {
+  var js = gulp.src(path.join(config.paths.dist, '**/*.js'), {
     read: false,
   });
-  var css = gulp.src([
-    path.join(config.paths.dist, '**/*.css'),
-    '!' + path.join(config.paths.dist, 'vendor/*.css'),
-  ], {
-    read: false,
-  });
-  var vendor = gulp.src([
-    path.join(config.paths.dist, 'vendor/*.js'),
-    path.join(config.paths.dist, 'vendor/*.css'),
-  ], {
+  var css = gulp.src(path.join(config.paths.dist, '**/*.css'), {
     read: false,
   });
 
@@ -66,10 +36,6 @@ gulp.task('inject:build', function() {
       relative: true,
     }))
     .pipe(inject(css, {
-      relative: true,
-    }))
-    .pipe(inject(vendor, {
-      name: 'bower',
       relative: true,
     }))
     .pipe(gulp.dest(config.paths.dist));

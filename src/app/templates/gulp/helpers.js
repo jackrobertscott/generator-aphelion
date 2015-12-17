@@ -37,6 +37,18 @@ Helpers.prototype.src = function src(dir, exts) {
   return sources;
 };
 
+Helpers.prototype.watch = function watch(dir, exts) {
+  var sources = [];
+  if (Array.isArray(exts)) {
+    exts.forEach(function(ext) {
+      sources = sources.concat(path.join(dir, '**/*' + ext || ''));
+    }.bind(this));
+  } else {
+    sources = sources.concat(path.join(dir, '**/*' + exts));
+  }
+  return sources;
+};
+
 Helpers.prototype.others = function others(dir) {
   return [
     path.join(dir, '**'),

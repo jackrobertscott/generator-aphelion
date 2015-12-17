@@ -7,32 +7,32 @@ require('require-dir')('./gulp');
 gulp.task('compile', gulp.series(
   'clean:tmp',
   gulp.parallel(
-    'html',<% if (jade) { %>
-    'jade',<% } %><% if (nunjucks) { %>
-    'nunjucks',<% } %><% if (jade || nunjucks) { %>
-    'markdown',<% } %>
-    'js',<% if (ts) { %>
-    'ts',<% } %><% if (coffee) { %>
-    'coffee',<% } %>
-    'css',<% if (less) { %>
-    'less',<% } %><% if (sass) { %>
-    'sass',<% } %>
+    'html'<% if (jade) { %>,
+    'jade'<% } %><% if (nunjucks) { %>,
+    'nunjucks'<% } %><% if (jade || nunjucks) { %>,
+    'markdown'<% } %>,
+    'js'<% if (ts) { %>,
+    'ts'<% } %><% if (coffee) { %>,
+    'coffee'<% } %>,
+    'css'<% if (less) { %>,
+    'less'<% } %><% if (sass) { %>,
+    'sass'<% } %>,
     'vendor'
   ),
   'inject:tmp'
 ));
 
 gulp.task('watch', gulp.parallel(
-  'watch:html',<% if (jade) { %>
-  'watch:jade',<% } %><% if (nunjucks) { %>
-  'watch:nunjucks',<% } %><% if (jade || nunjucks) { %>
-  'watch:markdown',<% } %>
-  'watch:js',<% if (ts) { %>
-  'watch:ts',<% } %><% if (coffee) { %>
-  'watch:coffee',<% } %>
-  'watch:css',<% if (less) { %>
-  'watch:less',<% } %><% if (sass) { %>
-  'watch:sass',<% } %>
+  'watch:html'<% if (jade) { %>,
+  'watch:jade'<% } %><% if (nunjucks) { %>,
+  'watch:nunjucks'<% } %><% if (jade || nunjucks) { %>,
+  'watch:markdown'<% } %>,
+  'watch:js'<% if (ts) { %>,
+  'watch:ts'<% } %><% if (coffee) { %>,
+  'watch:coffee'<% } %>,
+  'watch:css'<% if (less) { %>,
+  'watch:less'<% } %><% if (sass) { %>,
+  'watch:sass'<% } %>
 ));
 
 gulp.task('build', gulp.series(
