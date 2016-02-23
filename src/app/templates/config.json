@@ -2,7 +2,8 @@
   "paths": {
     "src": "./src",
     "tmp": "./.tmp",
-    "dist": "./dist"
+    "dist": "./dist",
+    "vendor": "./bower_components"
   },
   "sourcemaps": false,
   "cname": "",
