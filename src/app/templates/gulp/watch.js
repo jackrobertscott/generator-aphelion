@@ -7,7 +7,10 @@ var helpers = require('./helpers');
 
 gulp.task('browser-sync:tmp', function(cb) {
   browserSync.init({
-    server: config.paths.tmp,
+    server: [
+      config.paths.tmp,
+      config.paths.vendor,
+    ],
   }, cb);
 });
 
