@@ -29,7 +29,7 @@ Script and style files, both custom built and installed from bower, may be injec
   <head>
     <title>Title</title>
     <!-- bower:css -->
-    <!-- bower installed css files will go here... -->
+    <!-- manually insert vendor/bower file links here... -->
     <!-- endinject -->
 
     <!-- inject:css -->
@@ -38,7 +38,7 @@ Script and style files, both custom built and installed from bower, may be injec
   </head>
   <body>
     <!-- bower:js -->
-    <!-- bower installed scripts will go here... -->
+    <!-- manually insert vendor/bower file links here... -->
     <!-- endinject -->
 
     <!-- inject:js -->

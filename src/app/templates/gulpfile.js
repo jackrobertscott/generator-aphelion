@@ -17,7 +17,7 @@ gulp.task('compile', gulp.series(
     'css'<% if (less) { %>,
     'less'<% } %><% if (sass) { %>,
     'sass'<% } %>,
-    'vendor'
+    'other'
   ),
   'inject:tmp'
 ));
