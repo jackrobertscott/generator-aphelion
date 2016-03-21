@@ -17,7 +17,8 @@ gulp.task('compile', gulp.series(
     'css'<% if (less) { %>,
     'less'<% } %><% if (sass) { %>,
     'sass'<% } %>,
-    'other'
+    'other',
+    'images'
   ),
   'inject:tmp'
 ));
@@ -39,7 +40,8 @@ gulp.task('build', gulp.series(
   'compile',
   'clean:build',
   'compress',
-  'inject:build'
+  'inject:build',
+  'inject:vendor'
 ));
 
 gulp.task('serve', gulp.series(

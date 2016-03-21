@@ -51,8 +51,9 @@ Helpers.prototype.watch = function watch(dir, exts) {
 
 Helpers.prototype.others = function others(dir) {
   return [
-    path.join(dir, '**'),
-    '!' + path.join(dir, '**/*{' + this.exts.join(',') + '}'),
+    path.join(dir, '**/*'),
+    '!' + path.join(dir, '**/_*{/**,}'),
+    '!' + path.join(dir, '**/*{' + this.exts.join(',') + '}'), // This doesn't work???
   ];
 };<% if (jade || nunjucks) { %>
 

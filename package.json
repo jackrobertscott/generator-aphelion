@@ -1,6 +1,6 @@
 {
   "name": "generator-aphelion",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Generator for capable static websites",
   "main": "index.js",
   "keywords": [
