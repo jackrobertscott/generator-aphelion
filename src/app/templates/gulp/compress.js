@@ -12,12 +12,7 @@ var csso = require('gulp-csso');
 var minify = require('gulp-minify-html');
 var config = require('../config');
 
-gulp.task('compress', gulp.parallel(
-  'compress:custom',
-  'compress:vendor'
-));
-
-gulp.task('compress:custom', function() {
+gulp.task('compress', function() {
   var htmlFilter = filter('**/*.html', {
     restore: true,
   });
@@ -29,13 +24,13 @@ gulp.task('compress:custom', function() {
   });
 
   return gulp.src(path.join(config.paths.tmp, '**'))
-    .pipe(htmlFilter)
-    .pipe(minify({
-      comments: true,
-      conditionals: true,
-      spare: true,
-    }))
-    .pipe(htmlFilter.restore)
+    // .pipe(htmlFilter)
+    // .pipe(minify({
+    //   comments: true,
+    //   conditionals: true,
+    //   spare: true,
+    // }))
+    // .pipe(htmlFilter.restore)
     .pipe(jsFilter)
     .pipe(concat('scripts.min.js'))
     .pipe(uglify())
@@ -46,13 +41,5 @@ gulp.task('compress:custom', function() {
     .pipe(csso())
     .pipe(rev())
     .pipe(cssFilter.restore)
-    .pipe(gulp.dest(config.paths.dist));
-});
-
-gulp.task('compress:vendor', function() {
-  return gulp.src(path.join(config.paths.tmp, '**/*.html'))
-    .pipe(useref())
-    .pipe(gulpif('**/*.js', uglify()))
-    .pipe(gulpif('**/*.css', csso()))
     .pipe(gulp.dest(config.paths.dist));
 });

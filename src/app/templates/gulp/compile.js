@@ -111,6 +111,6 @@ gulp.task('images', function() {
 });
 
 gulp.task('other', function() {
-  return gulp.src(helpers.other(config.paths.src))
+  return gulp.src(helpers.others(config.paths.src))
     .pipe(gulp.dest(config.paths.tmp));
 });
